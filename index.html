@@ -171,11 +171,16 @@
     }
     .rule__edge {
       flex: none;
-      width: 12px;
+      width: 9px;
       height: auto;
       display: block;
+      margin-right: -5px;
     }
-    .rule__edge--right { transform: scaleX(-1); }
+    .rule__edge--right {
+      transform: scaleX(-1);
+      margin-right: 0;
+      margin-left: -5px;
+    }
     .rule--bottom .rule__center { width: 40px; }
 
     /* ---------- Tagline ---------- */
@@ -330,6 +335,19 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    /* ---------- Mobile-only refinements ---------- */
+    @media (max-width: 599px) {
+      .page { padding-top: 44px; }
+      .tagline { line-height: 0.92; }
+      /* take the footer out of fixed positioning so it no longer
+         overlaps the CTAs; let it sit in normal flow at the bottom */
+      .footer {
+        position: static;
+        margin: 8px auto 0;
+        background: none;
       }
     }
 
