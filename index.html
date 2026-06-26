@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>VIM Events &amp; Décor — Elegance in Every Emotion</title>
+  <meta name="description" content="For over 30 years, VIM Events &amp; Décor has crafted weddings across Tamil Nadu that are beautiful, personal and unforgettable. Our new website is on its way." />
+  <meta name="theme-color" content="#7B1A1A" />
+  <meta name="author" content="VIM Events &amp; Décor by Thiagarajan" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VIM Events &amp; Décor — Elegance in Every Emotion" />
+  <meta property="og:description" content="For over 30 years, VIM Events &amp; Décor has crafted weddings across Tamil Nadu that are beautiful, personal and unforgettable. Our new website is on its way." />
+  <meta property="og:image" content="vim-logo.png" />
+  <meta property="og:url" content="https://www.vimeventsdecor.com" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VIM Events &amp; Décor — Elegance in Every Emotion" />
+  <meta name="twitter:description" content="For over 30 years, VIM Events &amp; Décor has crafted weddings across Tamil Nadu. Our new website is on its way." />
+  <meta name="twitter:image" content="vim-logo.png" />
+
+  <link rel="icon" type="image/svg+xml" href="vim-logo.svg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #FAF8F5;
+      --maroon:    #7B1A1A;
+      --gold:      #C9A96E;
+      --gold-soft: rgba(201, 169, 110, 0.55);
+      --gold-line: rgba(201, 169, 110, 0.40);
+      --body:      #5a3a3a;
+      --subtle:    #bba89a;
+      --ink:       #4a2727; /* deep maroon-brown for the tagline */
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg);
+      color: var(--body);
+      font-family: "Jost", system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-synthesis: none;
+      font-kerning: normal;
+      font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Soft paper texture across the whole page */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("vim-pattern.png");
+      background-repeat: repeat;
+      background-size: 240px;
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Faint mandala blooming up from the bottom centre */
+    .mandala {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      /* push the lower part below the fold so the top crest blooms upward */
+      transform: translate(-50%, 68%);
+      width: min(150vw, 760px);
+      max-width: none;
+      opacity: 0.13;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Mirrored mandala blooming down from the top, only 10% visible */
+    .mandala--top {
+      bottom: auto;
+      top: 0;
+      transform: translate(-50%, -90%);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 96px 24px 40px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ---------- Logo ---------- */
+    .logo {
+      width: 200px;
+      max-width: 62%;
+      height: auto;
+      display: block;
+    }
+
+    /* ---------- Ornamental rule ---------- */
+    .rule {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
+    .rule__line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(
+        to var(--dir, right),
+        transparent,
+        var(--gold-line) 55%,
+        var(--gold-soft)
+      );
+    }
+    .rule__line--left { --dir: left; }
+    .rule__dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.7;
+      flex: none;
+    }
+    .rule__gem {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex: none;
+      box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.18);
+    }
+    .rule__center {
+      flex: none;
+      width: 78px;
+      height: auto;
+      display: block;
+    }
+    .rule__edge {
+      flex: none;
+      width: 12px;
+      height: auto;
+      display: block;
+    }
+    .rule__edge--right { transform: scaleX(-1); }
+    .rule--bottom .rule__center { width: 40px; }
+
+    /* ---------- Tagline ---------- */
+    .tagline {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 3em;
+      line-height: 1.2;
+      color: var(--ink);
+      letter-spacing: 0.005em;
+    }
+
+    /* ---------- Badge ---------- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7em;
+      padding: 9px 20px;
+      border: 1px solid var(--gold-soft);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.35);
+      color: var(--maroon);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge::before,
+    .badge::after {
+      content: "+";
+      color: var(--gold);
+      font-weight: 400;
+      font-size: 0.85em;
+      line-height: 1;
+    }
+
+    /* ---------- Body copy ---------- */
+    .copy {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .copy p {
+      margin: 0;
+      font-weight: 300;
+      font-size: 1.1em;
+      line-height: 1.4;
+      color: var(--body);
+    }
+    .copy p + p { margin-top: 1.1em; }
+
+    /* ---------- Call to action ---------- */
+    .actions {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 24px;
+      border: 1px solid var(--gold-soft);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.45);
+      color: var(--maroon);
+      font-family: "Jost", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.35s ease, color 0.35s ease,
+                  border-color 0.35s ease, transform 0.35s ease,
+                  box-shadow 0.35s ease;
+    }
+    .btn svg {
+      width: 17px;
+      height: 17px;
+      flex: none;
+    }
+    .btn:hover,
+    .btn:focus-visible {
+      background: var(--maroon);
+      border-color: var(--maroon);
+      color: var(--bg);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -12px rgba(123, 26, 26, 0.55);
+      outline: none;
+    }
+    .btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.45),
+                  0 10px 24px -12px rgba(123, 26, 26, 0.55);
+    }
+
+    /* ---------- Footer ---------- */
+    .footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 5%;
+      width: max-content;
+      max-width: 90vw;
+      margin-inline: auto;
+      z-index: 2;
+      padding: 4px 12px;
+      background: rgba(250, 248, 245, 0.72);
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.86rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .footer a {
+      color: var(--maroon);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .footer a:hover,
+    .footer a:focus-visible {
+      color: var(--maroon);
+      border-bottom-color: var(--gold-soft);
+      outline: none;
+    }
+
+    /* ---------- Vertical rhythm ---------- */
+    .logo    { margin-bottom: 30px; }
+    .rule--top { margin-bottom: 18px; }
+    .tagline { margin-bottom: 16px; }
+    .badge   { margin-bottom: 18px; }
+    .copy    { margin-bottom: 38px; }
+    .actions { margin-bottom: 42px; }
+    .rule--bottom { margin-bottom: 16px; }
+
+    /* ---------- Entrance animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: var(--d, 0s);
+    }
+    @keyframes fade-up {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- Tablet / desktop refinements ---------- */
+    @media (min-width: 600px) {
+      .page { padding: 96px 32px 48px; }
+      .logo { width: 230px; }
+      .actions {
+        flex-direction: row;
+        justify-content: center;
+      }
+      .btn { width: auto; min-width: 190px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+      .btn { transition: background-color 0.2s ease, color 0.2s ease; }
+      .btn:hover,
+      .btn:focus-visible { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <img class="mandala mandala--top" src="mandala-design-pattern.svg" alt="" aria-hidden="true" />
+  <img class="mandala" src="mandala-design-pattern.svg" alt="" aria-hidden="true" />
+
+  <main class="page">
+    <div class="card">
+
+      <img
+        class="logo reveal"
+        style="--d: 0.05s"
+        src="vim-logo.svg"
+        width="328"
+        height="181"
+        alt="VIM Events &amp; Décor by Thiagarajan — since 1995"
+      />
+
+      <div class="rule rule--top reveal" style="--d: 0.20s" aria-hidden="true">
+        <img class="rule__edge" src="edge-details.svg" alt="" />
+        <span class="rule__line rule__line--left"></span>
+        <img class="rule__center" src="middle-details.svg" alt="" />
+        <span class="rule__line"></span>
+        <img class="rule__edge rule__edge--right" src="edge-details.svg" alt="" />
+      </div>
+
+      <h1 class="tagline reveal" style="--d: 0.32s">&ldquo;Elegance in every emotion&rdquo;</h1>
+
+      <span class="badge reveal" style="--d: 0.44s">Our website is on its way</span>
+
+      <div class="copy reveal" style="--d: 0.56s">
+        <p>For over 30 years, we&rsquo;ve had the honor of being part of life&rsquo;s most precious moments and celebrations across Tamil Nadu.</p>
+        <p>With grace in our hearts and tradition in our roots, we continue to craft weddings that are beautiful, personal, and unforgettable. Thank you for trusting us with your happiness.</p>
+      </div>
+
+      <div class="actions reveal" style="--d: 0.68s">
+        <a class="btn" href="mailto:hello@vimeventsdecor.com" aria-label="Send an enquiry by email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m3 7 9 6 9-6" />
+          </svg>
+          <span>Send an enquiry</span>
+        </a>
+
+        <a class="btn" href="https://wa.me/919841646441?text=Hi%2C%20I%20came%20across%20VIM%20Events%20%26%20D%C3%A9cor%20and%20would%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.42 5.82c0 4.54-3.7 8.24-8.25 8.24a8.23 8.23 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24Zm-3.2 4.4c-.15 0-.4.06-.6.29-.21.23-.8.78-.8 1.91 0 1.12.82 2.21.93 2.36.11.15 1.6 2.45 3.89 3.43.54.23.97.37 1.3.48.55.17 1.04.15 1.44.09.44-.07 1.35-.55 1.54-1.08.19-.53.19-.99.13-1.08-.06-.09-.21-.15-.44-.27-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.59.74-.72.89-.13.15-.27.17-.5.06-.23-.12-.96-.36-1.84-1.13-.68-.61-1.14-1.36-1.27-1.59-.13-.23-.01-.35.1-.47.1-.1.23-.27.34-.4.11-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.12-.5-1.25-.7-1.71-.18-.44-.37-.38-.51-.39-.13 0-.28-.01-.43-.01Z" />
+          </svg>
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+
+      <div class="rule rule--bottom reveal" style="--d: 0.80s" aria-hidden="true">
+        <img class="rule__edge" src="edge-details.svg" alt="" />
+        <span class="rule__line rule__line--left"></span>
+        <img class="rule__center" src="middle-details-minimal.svg" alt="" />
+        <span class="rule__line"></span>
+        <img class="rule__edge rule__edge--right" src="edge-details.svg" alt="" />
+      </div>
+
+      <p class="footer reveal" style="--d: 0.92s">
+        designed by <a href="https://www.eswarcreatives.in" target="_blank" rel="noopener">eswarcreatives.in</a>
+      </p>
+
+    </div>
+  </main>
+</body>
+</html>
