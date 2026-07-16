@@ -15,7 +15,7 @@ export default function HomePage() {
         aria-hidden="true"
         width={760}
         height={760}
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 w-[min(150vw,760px)] max-w-none -translate-x-1/2 -translate-y-[90%] opacity-10"
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 w-[min(150vw,760px)] max-w-none -translate-x-1/2 -translate-y-[90%] opacity-[0.13]"
       />
       <Image
         src="/mandala-design-pattern.svg"
@@ -23,20 +23,25 @@ export default function HomePage() {
         aria-hidden="true"
         width={760}
         height={760}
-        className="pointer-events-none absolute bottom-0 left-1/2 -z-10 w-[min(150vw,760px)] max-w-none translate-x-[-50%] translate-y-[68%] opacity-10"
+        className="pointer-events-none absolute bottom-0 left-1/2 -z-10 w-[min(150vw,760px)] max-w-none translate-x-[-50%] translate-y-[68%] opacity-[0.13]"
       />
 
       <section className="mx-auto flex max-w-xl flex-col items-center gap-6 px-6 py-16 text-center sm:py-24">
         <Image
           src="/vim-logo.svg"
-          alt="VIM Events & Décor by Thiagarajan — since 1995"
+          alt="VIM Events & Décor by Thiagarajan — since 1993"
           width={230}
           height={127}
-          className="w-40 sm:w-56"
+          className="reveal w-40 sm:w-56"
+          style={{ "--d": "0.05s" } as React.CSSProperties}
           priority
         />
 
-        <div className="flex w-full max-w-sm items-center gap-2" aria-hidden="true">
+        <div
+          className="reveal flex w-full max-w-sm items-center gap-2"
+          style={{ "--d": "0.20s" } as React.CSSProperties}
+          aria-hidden="true"
+        >
           <Image src="/edge-details.svg" alt="" width={9} height={20} />
           <span className="h-px flex-1 bg-gradient-to-r from-transparent via-gold-light/60 to-gold/70" />
           <Image src="/middle-details.svg" alt="" width={78} height={20} />
@@ -50,19 +55,31 @@ export default function HomePage() {
           />
         </div>
 
-        <h1 className="font-display text-4xl italic text-ink sm:text-5xl">
+        <h1
+          className="reveal font-display text-4xl italic text-ink sm:text-5xl"
+          style={{ "--d": "0.32s" } as React.CSSProperties}
+        >
           &ldquo;{t("hero.tagline")}&rdquo;
         </h1>
 
-        <span className="inline-flex items-center gap-2 rounded-full border border-gold-light/50 bg-white/40 px-5 py-2 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-maroon">
+        <span
+          className="reveal inline-flex items-center gap-2 rounded-full border border-gold-light/50 bg-white/40 px-5 py-2 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-maroon"
+          style={{ "--d": "0.44s" } as React.CSSProperties}
+        >
           + {t("hero.pill")} +
         </span>
 
-        <p className="max-w-md font-body text-[1.1em] leading-relaxed text-muted">
+        <p
+          className="reveal max-w-md font-body text-[1.1em] leading-relaxed text-muted"
+          style={{ "--d": "0.56s" } as React.CSSProperties}
+        >
           {t("hero.body")}
         </p>
 
-        <div className="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
+        <div
+          className="reveal flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center"
+          style={{ "--d": "0.68s" } as React.CSSProperties}
+        >
           <a
             href={ENQUIRY_MAILTO_URL}
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-gold-light/50 bg-white/45 px-6 py-2.5 font-body text-sm tracking-wide text-maroon transition-all hover:-translate-y-0.5 hover:border-maroon hover:bg-maroon hover:text-cream"
@@ -87,7 +104,11 @@ export default function HomePage() {
           </a>
         </div>
 
-        <div className="flex w-full max-w-xs items-center gap-2" aria-hidden="true">
+        <div
+          className="reveal flex w-full max-w-xs items-center gap-2"
+          style={{ "--d": "0.80s" } as React.CSSProperties}
+          aria-hidden="true"
+        >
           <Image src="/edge-details.svg" alt="" width={9} height={20} />
           <span className="h-px flex-1 bg-gradient-to-r from-transparent via-gold-light/60 to-gold/70" />
           <Image src="/middle-details-minimal.svg" alt="" width={40} height={20} />

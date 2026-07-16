@@ -6,7 +6,10 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t border-gold-light/30 py-6 text-center font-body text-sm text-ink">
+    <footer
+      className="reveal border-t border-gold-light/30 py-6 text-center font-body text-sm text-ink"
+      style={{ "--d": "0.92s" } as React.CSSProperties}
+    >
       <p>{t("footer.since")}</p>
       <a
         href="https://www.eswarcreatives.in"

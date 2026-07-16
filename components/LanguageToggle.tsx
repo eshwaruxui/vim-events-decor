@@ -16,7 +16,7 @@ export function LanguageToggle() {
     <div
       role="group"
       aria-label="Choose language"
-      className="flex items-center gap-1 rounded-full border border-gold-light/40 bg-white/40 p-1"
+      className="flex flex-wrap items-center justify-center gap-1 rounded-full border border-gold-light/40 bg-white/40 p-1"
     >
       {OPTIONS.map((option) => {
         const isActive = language === option.value;

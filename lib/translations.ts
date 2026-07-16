@@ -35,7 +35,7 @@ export const translations: Translations = {
     "cta.enquiry": "Send an Enquiry",
     "cta.whatsapp": "Chat on WhatsApp",
     "footer.credit": "Designed by Eswar Creatives",
-    "footer.since": "Since 1995",
+    "footer.since": "Since 1993",
   },
   ta: {
     "nav.home": "முகப்பு",
@@ -50,7 +50,7 @@ export const translations: Translations = {
     "cta.enquiry": "என்க்வயரி அனுப்புங்க",
     "cta.whatsapp": "வாட்ஸ்அப்பில் சேட் பண்ணுங்க",
     "footer.credit": "வடிவமைப்பு Eswar Creatives",
-    "footer.since": "1995 முதல்",
+    "footer.since": "1993 முதல்",
   },
   "ta-native": {
     "nav.home": "முகப்பு",
@@ -65,7 +65,7 @@ export const translations: Translations = {
     "cta.enquiry": "விசாரணை அனுப்பவும்",
     "cta.whatsapp": "வாட்ஸ்-அப்பில் உரையாடுக",
     "footer.credit": "வடிவமைத்தவர் Eswar Creatives",
-    "footer.since": "1995 ஆம் ஆண்டு முதல்",
+    "footer.since": "1993 ஆம் ஆண்டு முதல்",
   },
   "ta-modern": {
     "nav.home": "Home",
@@ -80,6 +80,6 @@ export const translations: Translations = {
     "cta.enquiry": "Enquiry அனுப்புங்க",
     "cta.whatsapp": "WhatsApp-ல Chat பண்ணுங்க",
     "footer.credit": "Design பண்ணது Eswar Creatives",
-    "footer.since": "1995 லேர்ந்து",
+    "footer.since": "1993 லேர்ந்து",
   },
 };

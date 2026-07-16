@@ -19,7 +19,7 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-gold-light/30 bg-cream/90 backdrop-blur">
-      <nav className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <nav className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/vim-logo.svg"
@@ -31,7 +31,7 @@ export function Nav() {
           />
         </Link>
 
-        <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 font-body text-sm text-ink">
+        <ul className="flex w-full flex-wrap items-center gap-x-5 gap-y-1 font-body text-sm text-ink sm:w-auto">
           {links.map((link) => (
             <li key={link.href}>
               <Link href={link.href} className="transition-colors hover:text-maroon">
@@ -41,7 +41,9 @@ export function Nav() {
           ))}
         </ul>
 
-        <LanguageToggle />
+        <div className="w-full sm:w-auto">
+          <LanguageToggle />
+        </div>
       </nav>
     </header>
   );
