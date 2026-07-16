@@ -44,3 +44,12 @@ Produces a static export in `out/`, deployed automatically to Cloudflare Pages o
 ## Language system
 
 Four modes — `en`, `ta`, `ta-native`, `ta-modern` — managed by `context/LanguageContext.tsx` and persisted to `localStorage` under the `vim-lang` key. Copy lives in `lib/translations.ts`.
+
+## Development workflow
+
+Feature work → staging branch → smoke test → merge to main
+
+- staging branch auto-deploys to: staging.vim-events-decor.pages.dev
+- main branch auto-deploys to: vimeventsdecor.com
+
+Never push feature code directly to main. Before every merge to main, run through [`scripts/smoke-test.md`](scripts/smoke-test.md) on the staging deploy.
