@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold-soft: rgba(201, 169, 110, 0.55);
+  --gold-line: rgba(201, 169, 110, 0.4);
+}
+
+body {
+  background-color: theme("colors.cream.DEFAULT");
+  color: theme("colors.muted");
+}

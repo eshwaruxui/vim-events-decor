@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "vim-events-decor",
+  "compatibility_date": "2024-09-23",
+  "pages_build_output_dir": "out",
+  "build": {
+    "command": "npm run build"
+  }
+}
