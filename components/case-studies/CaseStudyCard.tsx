@@ -54,7 +54,7 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
       </div>
 
       <div className="p-5">
-        <h3 className="font-display text-xl font-bold text-maroon line-clamp-3">
+        <h3 className="font-display text-xl font-bold text-ink line-clamp-3">
           {title}
         </h3>
         <p className="mt-2 font-body text-[13px] font-light text-muted">

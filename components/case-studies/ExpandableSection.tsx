@@ -25,7 +25,7 @@ export function ExpandableSection({
         aria-controls={panelId}
         className="flex w-full items-center justify-between gap-4 text-left"
       >
-        <span className="font-display text-lg font-semibold text-maroon">
+        <span className="font-display text-lg font-semibold text-ink">
           {title}
         </span>
         <span
