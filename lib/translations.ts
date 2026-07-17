@@ -12,7 +12,39 @@ export type TranslationKey =
   | "cta.enquiry"
   | "cta.whatsapp"
   | "footer.credit"
-  | "footer.since";
+  | "footer.since"
+  | "gallery.title"
+  | "gallery.subtitle"
+  | "gallery.filterAll"
+  | "gallery.filterWedding"
+  | "gallery.filterCorporate"
+  | "gallery.filterTemple"
+  | "gallery.filterReception"
+  | "gallery.loadMore"
+  | "gallery.noResults"
+  | "gallery.photoCount"
+  | "gallery.lightboxClose"
+  | "gallery.lightboxPrev"
+  | "gallery.lightboxNext"
+  | "caseStudies.title"
+  | "caseStudies.subtitle"
+  | "caseStudies.readMore"
+  | "caseStudies.back"
+  | "caseStudies.clientType"
+  | "caseStudies.location"
+  | "caseStudies.scale"
+  | "caseStudies.timeline"
+  | "caseStudies.outcome"
+  | "caseStudies.theBrief"
+  | "caseStudies.theChallenge"
+  | "caseStudies.whatWeDid"
+  | "caseStudies.theResult"
+  | "caseStudies.eventGallery"
+  | "caseStudies.ctaTitle"
+  | "caseStudies.ctaWhatsApp"
+  | "caseStudies.ctaEnquiry"
+  | "caseStudies.notFound"
+  | "caseStudies.guestCount";
 
 type Translations = Record<Language, Record<TranslationKey, string>>;
 
@@ -36,6 +68,38 @@ export const translations: Translations = {
     "cta.whatsapp": "Chat on WhatsApp",
     "footer.credit": "Designed by Eswar Creatives",
     "footer.since": "Since 1993",
+    "gallery.title": "Our Work",
+    "gallery.subtitle": "30 years of celebrations across Tamil Nadu",
+    "gallery.filterAll": "All",
+    "gallery.filterWedding": "Wedding",
+    "gallery.filterCorporate": "Corporate",
+    "gallery.filterTemple": "Temple",
+    "gallery.filterReception": "Reception",
+    "gallery.loadMore": "Load more",
+    "gallery.noResults": "No works in this category yet",
+    "gallery.photoCount": "photos",
+    "gallery.lightboxClose": "Close",
+    "gallery.lightboxPrev": "Previous",
+    "gallery.lightboxNext": "Next",
+    "caseStudies.title": "Case Studies",
+    "caseStudies.subtitle": "How we bring complex briefs to life",
+    "caseStudies.readMore": "Read case study",
+    "caseStudies.back": "← All case studies",
+    "caseStudies.clientType": "Client type",
+    "caseStudies.location": "Location",
+    "caseStudies.scale": "Scale",
+    "caseStudies.timeline": "Timeline",
+    "caseStudies.outcome": "Outcome",
+    "caseStudies.theBrief": "The Brief",
+    "caseStudies.theChallenge": "The Challenge",
+    "caseStudies.whatWeDid": "What We Did",
+    "caseStudies.theResult": "The Result",
+    "caseStudies.eventGallery": "Gallery from this event",
+    "caseStudies.ctaTitle": "Planning an event?",
+    "caseStudies.ctaWhatsApp": "Chat on WhatsApp",
+    "caseStudies.ctaEnquiry": "Send an enquiry",
+    "caseStudies.notFound": "Case study not found",
+    "caseStudies.guestCount": "guests",
   },
   ta: {
     "nav.home": "முகப்பு",
@@ -51,6 +115,38 @@ export const translations: Translations = {
     "cta.whatsapp": "வாட்ஸ்அப்பில் சேட் பண்ணுங்க",
     "footer.credit": "வடிவமைப்பு Eswar Creatives",
     "footer.since": "1993 முதல்",
+    "gallery.title": "எங்க வேலை",
+    "gallery.subtitle": "30 வருஷமா தமிழ்நாடு முழுக்க கொண்டாட்டங்கள்",
+    "gallery.filterAll": "எல்லாம்",
+    "gallery.filterWedding": "திருமணம்",
+    "gallery.filterCorporate": "கார்ப்பரேட்",
+    "gallery.filterTemple": "கோயில்",
+    "gallery.filterReception": "வரவேற்பு",
+    "gallery.loadMore": "இன்னும் காட்டு",
+    "gallery.noResults": "இந்த கேட்டகிரில இன்னும் வேலை இல்ல",
+    "gallery.photoCount": "போட்டோஸ்",
+    "gallery.lightboxClose": "மூடு",
+    "gallery.lightboxPrev": "முந்தையது",
+    "gallery.lightboxNext": "அடுத்தது",
+    "caseStudies.title": "கேஸ் ஸ்டடீஸ்",
+    "caseStudies.subtitle": "கடினமான பணிகளை நாங்க எப்படி நிறைவேத்துறோம்",
+    "caseStudies.readMore": "கேஸ் ஸ்டடி படிங்க",
+    "caseStudies.back": "← எல்லா கேஸ் ஸ்டடீஸும்",
+    "caseStudies.clientType": "கிளையன்ட் வகை",
+    "caseStudies.location": "இடம்",
+    "caseStudies.scale": "அளவு",
+    "caseStudies.timeline": "நேர அட்டவணை",
+    "caseStudies.outcome": "முடிவு",
+    "caseStudies.theBrief": "விவரம்",
+    "caseStudies.theChallenge": "சவால்",
+    "caseStudies.whatWeDid": "நாங்க என்ன பண்ணோம்",
+    "caseStudies.theResult": "விளைவு",
+    "caseStudies.eventGallery": "இந்த நிகழ்விலிருந்து போட்டோஸ்",
+    "caseStudies.ctaTitle": "நிகழ்வு பிளான் பண்றீங்களா?",
+    "caseStudies.ctaWhatsApp": "வாட்ஸ்அப்பில் சேட் பண்ணுங்க",
+    "caseStudies.ctaEnquiry": "என்க்வயரி அனுப்புங்க",
+    "caseStudies.notFound": "கேஸ் ஸ்டடி கிடைக்கல",
+    "caseStudies.guestCount": "விருந்தினர்கள்",
   },
   "ta-native": {
     "nav.home": "முகப்பு",
@@ -66,6 +162,38 @@ export const translations: Translations = {
     "cta.whatsapp": "வாட்ஸ்-அப்பில் உரையாடுக",
     "footer.credit": "வடிவமைத்தவர் Eswar Creatives",
     "footer.since": "1993 ஆம் ஆண்டு முதல்",
+    "gallery.title": "எமது பணிகள்",
+    "gallery.subtitle": "முப்பதாண்டுகளாக தமிழ்நாடு முழுவதும் கொண்டாட்டங்கள்",
+    "gallery.filterAll": "அனைத்தும்",
+    "gallery.filterWedding": "திருமணம்",
+    "gallery.filterCorporate": "நிறுவனம்",
+    "gallery.filterTemple": "கோயில்",
+    "gallery.filterReception": "வரவேற்பு",
+    "gallery.loadMore": "மேலும் காண்க",
+    "gallery.noResults": "இப்பிரிவில் இதுவரை பணிகள் இல்லை",
+    "gallery.photoCount": "புகைப்படங்கள்",
+    "gallery.lightboxClose": "மூடுக",
+    "gallery.lightboxPrev": "முந்தையது",
+    "gallery.lightboxNext": "அடுத்தது",
+    "caseStudies.title": "நிகழ்வுச் செய்திகள்",
+    "caseStudies.subtitle": "சிக்கலான கோரிக்கைகளை நாங்கள் எவ்வாறு நிறைவேற்றுகிறோம்",
+    "caseStudies.readMore": "முழுமையாகப் படிக்க",
+    "caseStudies.back": "← அனைத்து நிகழ்வுச் செய்திகளும்",
+    "caseStudies.clientType": "வாடிக்கையாளர் வகை",
+    "caseStudies.location": "இடம்",
+    "caseStudies.scale": "அளவு",
+    "caseStudies.timeline": "காலஅட்டவணை",
+    "caseStudies.outcome": "விளைவு",
+    "caseStudies.theBrief": "கோரிக்கை",
+    "caseStudies.theChallenge": "சவால்",
+    "caseStudies.whatWeDid": "நாங்கள் செய்தது",
+    "caseStudies.theResult": "முடிவு",
+    "caseStudies.eventGallery": "இந்நிகழ்வின் படத்தொகுப்பு",
+    "caseStudies.ctaTitle": "நிகழ்வொன்று திட்டமிடுகிறீர்களா?",
+    "caseStudies.ctaWhatsApp": "வாட்ஸ்-அப்பில் உரையாடுக",
+    "caseStudies.ctaEnquiry": "விசாரணை அனுப்பவும்",
+    "caseStudies.notFound": "நிகழ்வுச் செய்தி கிடைக்கவில்லை",
+    "caseStudies.guestCount": "விருந்தினர்",
   },
   "ta-modern": {
     "nav.home": "Home",
@@ -81,5 +209,37 @@ export const translations: Translations = {
     "cta.whatsapp": "WhatsApp-ல Chat பண்ணுங்க",
     "footer.credit": "Design பண்ணது Eswar Creatives",
     "footer.since": "1993 லேர்ந்து",
+    "gallery.title": "Our Work",
+    "gallery.subtitle": "30 years-ஆ தமிழ்நாடு முழுக்க celebrations",
+    "gallery.filterAll": "All",
+    "gallery.filterWedding": "Wedding",
+    "gallery.filterCorporate": "Corporate",
+    "gallery.filterTemple": "Temple",
+    "gallery.filterReception": "Reception",
+    "gallery.loadMore": "இன்னும் Load பண்ணுங்க",
+    "gallery.noResults": "இந்த category-ல இன்னும் work எதுவும் இல்ல",
+    "gallery.photoCount": "photos",
+    "gallery.lightboxClose": "Close பண்ணு",
+    "gallery.lightboxPrev": "Previous",
+    "gallery.lightboxNext": "Next",
+    "caseStudies.title": "Case Studies",
+    "caseStudies.subtitle": "Complex briefs-ஐ நாங்க எப்படி life-க்கு கொண்டு வர்றோம்",
+    "caseStudies.readMore": "Case study படிங்க",
+    "caseStudies.back": "← All case studies",
+    "caseStudies.clientType": "Client type",
+    "caseStudies.location": "Location",
+    "caseStudies.scale": "Scale",
+    "caseStudies.timeline": "Timeline",
+    "caseStudies.outcome": "Outcome",
+    "caseStudies.theBrief": "The Brief",
+    "caseStudies.theChallenge": "The Challenge",
+    "caseStudies.whatWeDid": "நாங்க என்ன பண்ணோம்",
+    "caseStudies.theResult": "The Result",
+    "caseStudies.eventGallery": "இந்த event-ல இருந்து Gallery",
+    "caseStudies.ctaTitle": "Event plan பண்றீங்களா?",
+    "caseStudies.ctaWhatsApp": "WhatsApp-ல Chat பண்ணுங்க",
+    "caseStudies.ctaEnquiry": "Enquiry அனுப்புங்க",
+    "caseStudies.notFound": "Case study கிடைக்கல",
+    "caseStudies.guestCount": "guests",
   },
 };
