@@ -31,3 +31,10 @@ export const ENQUIRY_MAILTO_URL = `mailto:${BRAND.email.hello}?subject=${encodeU
 )}&body=${encodeURIComponent(
   "Hi VIM Events & Décor,\n\nI would like to enquire about your wedding decoration services.\n\nEvent Date:\nVenue:\nType of Event:\n\nPlease get in touch with me.\n\nThank you."
 )}`;
+
+// 10x10 cream-fill SVG, base64-encoded, used as next/image blurDataURL
+// while real photos load (or are missing, pending photo upload).
+export const IMAGE_BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDEwIDEwIj48cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiNGMEVDRTUiLz48L3N2Zz4=";
+
+export const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
