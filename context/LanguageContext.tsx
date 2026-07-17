@@ -37,18 +37,29 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(DEFAULT_LANGUAGE);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (isLanguage(stored)) {
-      setLanguageState(stored);
+    // localStorage can throw (private browsing, disabled storage, etc.) —
+    // fall back to the English default silently rather than crash.
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      if (isLanguage(stored)) {
+        setLanguageState(stored);
+      }
+    } catch {
+      // localStorage unavailable — keep default language
     }
   }, []);
 
   const setLanguage = (next: Language) => {
     setLanguageState(next);
-    window.localStorage.setItem(STORAGE_KEY, next);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // localStorage unavailable — selection just won't persist
+    }
   };
 
-  const t = (key: TranslationKey) => translations[language][key];
+  const t = (key: TranslationKey) =>
+    translations[language][key] ?? translations[DEFAULT_LANGUAGE][key];
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
