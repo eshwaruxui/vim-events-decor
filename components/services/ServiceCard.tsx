@@ -29,7 +29,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
         )}
       </div>
 
-      <h3 className="font-display text-xl font-bold text-ink">{title}</h3>
+      <h3 className="font-body text-xl font-bold text-ink">{title}</h3>
 
       <p className="mt-2 flex-1 font-body text-sm leading-[1.75] text-muted">
         {description}
