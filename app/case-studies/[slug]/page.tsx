@@ -1,5 +1,28 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { BRAND } from "@/lib/constants";
+import { caseStudies, getCaseStudyBySlug } from "@/lib/data/case-studies";
+import { CaseStudyDetail } from "@/components/case-studies/CaseStudyDetail";
+
 export function generateStaticParams() {
-  return [{ slug: "sample-wedding" }];
+  return caseStudies
+    .filter((cs) => cs.published)
+    .map((cs) => ({ slug: cs.slug }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
+  const caseStudy = getCaseStudyBySlug(params.slug);
+  if (!caseStudy) {
+    return { title: `${BRAND.name}` };
+  }
+  return {
+    title: `${caseStudy.title} | ${BRAND.name}`,
+    description: caseStudy.brief,
+  };
 }
 
 export default function CaseStudyDetailPage({
@@ -7,12 +30,11 @@ export default function CaseStudyDetailPage({
 }: {
   params: { slug: string };
 }) {
-  return (
-    <section className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 py-20 text-center">
-      <h1 className="font-display text-4xl italic text-ink">Case study: {params.slug}</h1>
-      <p className="max-w-md font-body text-muted">
-        This case study is being written up. Please check back soon.
-      </p>
-    </section>
-  );
+  const caseStudy = getCaseStudyBySlug(params.slug);
+
+  if (!caseStudy) {
+    notFound();
+  }
+
+  return <CaseStudyDetail caseStudy={caseStudy} />;
 }

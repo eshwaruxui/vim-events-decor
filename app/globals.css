@@ -33,3 +33,14 @@ body {
     animation: none;
   }
 }
+
+/* ---------- Print styles ---------- */
+@media print {
+  .no-print,
+  [role="dialog"] {
+    display: none !important;
+  }
+  .cs-section-panel {
+    max-height: none !important;
+  }
+}
