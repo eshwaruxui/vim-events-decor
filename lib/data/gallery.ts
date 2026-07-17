@@ -175,7 +175,7 @@ export const galleryItems: GalleryItem[] = [
     is_featured: false,
     sort_order: 10,
   },
-  // Temple items (3 entries)
+  // Temple items (3 entries) — displayed as "Spiritual" (event_type stays "temple")
   {
     id: "t-001",
     title: "Temple Festival Décor",
