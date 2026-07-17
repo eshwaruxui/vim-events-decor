@@ -10,6 +10,9 @@
 body {
   background-color: theme("colors.cream.DEFAULT");
   color: theme("colors.muted");
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ---------- Entrance animation ---------- */
