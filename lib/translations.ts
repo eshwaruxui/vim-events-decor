@@ -44,7 +44,32 @@ export type TranslationKey =
   | "caseStudies.ctaWhatsApp"
   | "caseStudies.ctaEnquiry"
   | "caseStudies.notFound"
-  | "caseStudies.guestCount";
+  | "caseStudies.guestCount"
+  | "services.title"
+  | "services.subtitle"
+  | "services.featuredBadge"
+  | "services.addonBadge"
+  | "services.enquireButton"
+  | "services.allServices"
+  | "services.viewGallery"
+  | "services.ctaTitle"
+  | "services.ctaSubtitle"
+  | "services.ctaWhatsApp"
+  | "services.ctaEnquiry"
+  | "contact.title"
+  | "contact.subtitle"
+  | "contact.enquiringAbout"
+  | "contact.name"
+  | "contact.phone"
+  | "contact.email"
+  | "contact.eventDate"
+  | "contact.eventType"
+  | "contact.selectEventType"
+  | "contact.serviceOfInterest"
+  | "contact.message"
+  | "contact.messagePlaceholder"
+  | "contact.submit"
+  | "contact.orWhatsApp";
 
 type Translations = Record<Language, Record<TranslationKey, string>>;
 
@@ -100,6 +125,34 @@ export const translations: Translations = {
     "caseStudies.ctaEnquiry": "Send an enquiry",
     "caseStudies.notFound": "Case study not found",
     "caseStudies.guestCount": "guests",
+    "services.title": "Our Services",
+    "services.subtitle":
+      "From weddings to sacred spaces — we bring 30 years of craft to every occasion",
+    "services.featuredBadge": "Featured",
+    "services.addonBadge": "Add-on",
+    "services.enquireButton": "Enquire about this service",
+    "services.allServices": "All Services",
+    "services.viewGallery": "View related work",
+    "services.ctaTitle": "Ready to plan your event?",
+    "services.ctaSubtitle":
+      "Tell us about your occasion and we'll craft something beautiful.",
+    "services.ctaWhatsApp": "Chat on WhatsApp",
+    "services.ctaEnquiry": "Send an enquiry",
+    "contact.title": "Get in Touch",
+    "contact.subtitle":
+      "Tell us about your celebration and we'll get back to you within a day.",
+    "contact.enquiringAbout": "Enquiring about:",
+    "contact.name": "Name",
+    "contact.phone": "Phone",
+    "contact.email": "Email",
+    "contact.eventDate": "Event Date",
+    "contact.eventType": "Event Type",
+    "contact.selectEventType": "Select event type",
+    "contact.serviceOfInterest": "Service of Interest",
+    "contact.message": "Message",
+    "contact.messagePlaceholder": "Tell us more about your event…",
+    "contact.submit": "Send Enquiry",
+    "contact.orWhatsApp": "Prefer WhatsApp? Message us directly.",
   },
   ta: {
     "nav.home": "முகப்பு",
@@ -147,6 +200,34 @@ export const translations: Translations = {
     "caseStudies.ctaEnquiry": "என்க்வயரி அனுப்புங்க",
     "caseStudies.notFound": "கேஸ் ஸ்டடி கிடைக்கல",
     "caseStudies.guestCount": "விருந்தினர்கள்",
+    "services.title": "எங்க சேவைகள்",
+    "services.subtitle":
+      "திருமணம் முதல் புனித இடங்கள் வரை — 30 வருஷ அனுபவத்தை ஒவ்வொரு நிகழ்விற்கும் கொண்டு வர்றோம்",
+    "services.featuredBadge": "சிறப்பு",
+    "services.addonBadge": "கூடுதல்",
+    "services.enquireButton": "இந்த சேவை பத்தி என்க்வயரி பண்ணுங்க",
+    "services.allServices": "எல்லா சேவைகளும்",
+    "services.viewGallery": "தொடர்புடைய வேலைகளை பாருங்க",
+    "services.ctaTitle": "உங்க நிகழ்வை பிளான் பண்ண ரெடியா?",
+    "services.ctaSubtitle":
+      "உங்க நிகழ்வு பத்தி சொல்லுங்க, நாங்க அழகா செஞ்சு தர்றோம்.",
+    "services.ctaWhatsApp": "வாட்ஸ்அப்பில் சேட் பண்ணுங்க",
+    "services.ctaEnquiry": "என்க்வயரி அனுப்புங்க",
+    "contact.title": "தொடர்பு கொள்ளுங்க",
+    "contact.subtitle":
+      "உங்க கொண்டாட்டம் பத்தி சொல்லுங்க, ஒரு நாளுக்குள் நாங்க திரும்பி பேசுறோம்.",
+    "contact.enquiringAbout": "இது பத்தி என்க்வயரி:",
+    "contact.name": "பெயர்",
+    "contact.phone": "போன் நம்பர்",
+    "contact.email": "மின்னஞ்சல்",
+    "contact.eventDate": "நிகழ்வு தேதி",
+    "contact.eventType": "நிகழ்வு வகை",
+    "contact.selectEventType": "நிகழ்வு வகையை தேர்ந்தெடுங்க",
+    "contact.serviceOfInterest": "தேவையான சேவை",
+    "contact.message": "செய்தி",
+    "contact.messagePlaceholder": "உங்க நிகழ்வு பத்தி இன்னும் கொஞ்சம் சொல்லுங்க…",
+    "contact.submit": "என்க்வயரி அனுப்புங்க",
+    "contact.orWhatsApp": "வாட்ஸ்அப்ல பேச விரும்புறீங்களா? நேரடியா மெசேஜ் பண்ணுங்க.",
   },
   "ta-native": {
     "nav.home": "முகப்பு",
@@ -194,6 +275,35 @@ export const translations: Translations = {
     "caseStudies.ctaEnquiry": "விசாரணை அனுப்பவும்",
     "caseStudies.notFound": "நிகழ்வுச் செய்தி கிடைக்கவில்லை",
     "caseStudies.guestCount": "விருந்தினர்",
+    "services.title": "எமது சேவைகள்",
+    "services.subtitle":
+      "திருமணங்கள் முதல் புனித தலங்கள் வரை — முப்பதாண்டு கைவினைத்திறனை ஒவ்வொரு நிகழ்விற்கும் அளிக்கின்றோம்",
+    "services.featuredBadge": "சிறப்புச் சேவை",
+    "services.addonBadge": "மேலதிகம்",
+    "services.enquireButton": "இச்சேவை குறித்து விசாரிக்க",
+    "services.allServices": "அனைத்து சேவைகளும்",
+    "services.viewGallery": "தொடர்புடைய படைப்புகளைக் காண்க",
+    "services.ctaTitle": "உங்கள் நிகழ்வைத் திட்டமிடத் தயாரா?",
+    "services.ctaSubtitle":
+      "உங்கள் நிகழ்வு குறித்து கூறுங்கள், அழகியதாக வடிவமைத்துத் தருகின்றோம்.",
+    "services.ctaWhatsApp": "வாட்ஸ்-அப்பில் உரையாடுக",
+    "services.ctaEnquiry": "விசாரணை அனுப்பவும்",
+    "contact.title": "தொடர்பு கொள்ளுங்கள்",
+    "contact.subtitle":
+      "உங்கள் கொண்டாட்டம் குறித்து கூறுங்கள், ஒரு நாளுக்குள் பதிலளிப்போம்.",
+    "contact.enquiringAbout": "இது குறித்த விசாரணை:",
+    "contact.name": "பெயர்",
+    "contact.phone": "தொலைபேசி எண்",
+    "contact.email": "மின்னஞ்சல்",
+    "contact.eventDate": "நிகழ்வு தேதி",
+    "contact.eventType": "நிகழ்வு வகை",
+    "contact.selectEventType": "நிகழ்வு வகையைத் தேர்ந்தெடுக்கவும்",
+    "contact.serviceOfInterest": "தேவையான சேவை",
+    "contact.message": "செய்தி",
+    "contact.messagePlaceholder": "உங்கள் நிகழ்வு குறித்து மேலும் கூறுங்கள்…",
+    "contact.submit": "விசாரணை அனுப்பவும்",
+    "contact.orWhatsApp":
+      "வாட்ஸ்-அப்பில் பேச விரும்புகிறீர்களா? நேரடியாகத் தொடர்பு கொள்ளுங்கள்.",
   },
   "ta-modern": {
     "nav.home": "Home",
@@ -241,5 +351,33 @@ export const translations: Translations = {
     "caseStudies.ctaEnquiry": "Enquiry அனுப்புங்க",
     "caseStudies.notFound": "Case study கிடைக்கல",
     "caseStudies.guestCount": "guests",
+    "services.title": "Our Services",
+    "services.subtitle":
+      "Weddings முதல் sacred spaces வரை — 30 years craft-ஐ ஒவ்வொரு occasion-க்கும் கொண்டு வர்றோம்",
+    "services.featuredBadge": "Featured",
+    "services.addonBadge": "Add-on",
+    "services.enquireButton": "இந்த service பத்தி Enquiry பண்ணுங்க",
+    "services.allServices": "All Services",
+    "services.viewGallery": "Related work பாருங்க",
+    "services.ctaTitle": "Event plan பண்ண ready-ஆ?",
+    "services.ctaSubtitle":
+      "உங்க occasion பத்தி சொல்லுங்க, நாங்க அழகா செஞ்சு தர்றோம்.",
+    "services.ctaWhatsApp": "WhatsApp-ல Chat பண்ணுங்க",
+    "services.ctaEnquiry": "Enquiry அனுப்புங்க",
+    "contact.title": "Get in Touch",
+    "contact.subtitle":
+      "உங்க celebration பத்தி சொல்லுங்க, ஒரு நாளுக்குள் நாங்க back பண்றோம்.",
+    "contact.enquiringAbout": "இது பத்தி Enquiry:",
+    "contact.name": "Name",
+    "contact.phone": "Phone Number",
+    "contact.email": "Email",
+    "contact.eventDate": "Event Date",
+    "contact.eventType": "Event Type",
+    "contact.selectEventType": "Event type-ஐ select பண்ணுங்க",
+    "contact.serviceOfInterest": "Service of Interest",
+    "contact.message": "Message",
+    "contact.messagePlaceholder": "உங்க event பத்தி இன்னும் கொஞ்சம் சொல்லுங்க…",
+    "contact.submit": "Enquiry அனுப்புங்க",
+    "contact.orWhatsApp": "WhatsApp-ல பேச விரும்புறீங்களா? Direct-ஆ message பண்ணுங்க.",
   },
 };
