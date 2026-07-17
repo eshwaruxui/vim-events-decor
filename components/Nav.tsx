@@ -23,7 +23,7 @@ export function Nav() {
     { href: "/", label: t("nav.home") },
     { href: "/gallery", label: t("nav.gallery") },
     { href: "/case-studies", label: t("nav.caseStudies") },
-    { href: "/#services", label: t("nav.services") },
+    { href: "/services", label: t("nav.services") },
     { href: "/contact", label: t("nav.contact") },
   ];
 
