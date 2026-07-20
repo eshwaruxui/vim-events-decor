@@ -14,204 +14,209 @@ export type GalleryItem = {
 };
 
 export const galleryItems: GalleryItem[] = [
-  // Wedding items (12 entries)
-  // NOTE: titles/descriptions below were drafted by re-describing what is
-  // actually visible in each photo (the old copy referenced jasmine,
-  // lotus, banana-trunk pillars etc. that don't appear in the real images).
-  // Tamil text is a draft machine/AI translation — needs native review
-  // before shipping. Year is a placeholder (unknown shoot date) for
-  // w-009..w-012 — confirm with client.
+  // Reception items (12 entries)
+  // NOTE: client moved/renamed these from public/images/gallery/{wide,
+  // landscape,portrait,square}/w-0xx-*.jpg into a single
+  // public/images/gallery/reception/r-0xx-*.jpg — confirmed byte-identical
+  // to the previously committed w-0xx files, i.e. this is a category
+  // correction (wedding -> reception), not new photos. Titles/descriptions
+  // were drafted by re-describing what is actually visible in each photo
+  // (the original mock copy referenced jasmine, lotus, banana-trunk
+  // pillars etc. that don't appear in the real images). Tamil text is a
+  // draft machine/AI translation — needs native review before shipping.
+  // Year is a placeholder (unknown shoot date) for r-009..r-012 — confirm
+  // with client.
   {
-    id: "w-001",
+    id: "r-001",
     title: "Golden Carved Arch Mandap",
     title_ta: "தங்க செதுக்கல் வளைவு மண்டபம் (வரைவு)",
     description:
       "Ornate gold-panelled stage with a carved floral archway, rose bouquets in brass urns, and a red-and-white floral aisle border",
     description_ta:
       "தங்க பேனல் மேடை, செதுக்கல் மலர் வளைவு, பித்தளை குடங்களில் ரோஜா மலர்கள் (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2024,
-    image_url: "/images/gallery/landscape/w-001-land.jpg",
+    image_url: "/images/gallery/reception/r-001-land.jpg",
     width: 1867,
     height: 1245,
     is_featured: true,
     sort_order: 1,
   },
   {
-    id: "w-002",
+    id: "r-002",
     title: "Amber Drape Rose Arch",
     title_ta: "அம்பர் திரை ரோஜா வளைவு (வரைவு)",
     description:
       "Copper fairy-lit drape backdrop framed by a peach and cream rose arch, with a mixed gerbera flower bed at the stage edge",
     description_ta:
       "செம்பு நிற திரை பின்னணி, பீச் மற்றும் கிரீம் ரோஜா வளைவு, மேடை விளிம்பில் கெர்பரா மலர் படுக்கை (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2024,
-    image_url: "/images/gallery/landscape/w-002-land1.jpg",
+    image_url: "/images/gallery/reception/r-002-land1.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
     sort_order: 2,
   },
   {
-    id: "w-003",
+    id: "r-003",
     title: "Art Deco Pastel Backdrop",
     title_ta: "ஆர்ட் டெகோ பாஸ்டல் பின்னணி (வரைவு)",
     description:
       "Pink and peach art-deco panelled backdrop with a floral monogram wreath, cream loveseat, and a white daisy border",
     description_ta:
       "இளஞ்சிவப்பு, பீச் ஆர்ட் டெகோ பேனல் பின்னணி, மலர் மோனோகிராம் மாலை, வெள்ளை டெய்சி எல்லை (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2023,
-    image_url: "/images/gallery/landscape/w-003-land.jpg",
+    image_url: "/images/gallery/reception/r-003-land.jpg",
     width: 1867,
     height: 1245,
     is_featured: true,
     sort_order: 3,
   },
   {
-    id: "w-004",
+    id: "r-004",
     title: "Red Rose Archway Stage",
     title_ta: "சிவப்பு ரோஜா வளைவு மேடை (வரைவு)",
     description:
       "Fairy-lit arches trailing red roses over a gold-carved chaise, set on a green motif carpet with a red-and-white floral edge",
     description_ta:
       "விளக்கு அலங்கார வளைவுகள், சிவப்பு ரோஜாக்கள், தங்க செதுக்கல் இருக்கை, பச்சை கம்பள தரை (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2024,
-    image_url: "/images/gallery/landscape/w-004-land.jpg",
+    image_url: "/images/gallery/reception/r-004-land.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
     sort_order: 4,
   },
   {
-    id: "w-005",
+    id: "r-005",
     title: "Marble Panel Monogram Stage",
     title_ta: "மார்பிள் பேனல் மோனோகிராம் மேடை (வரைவு)",
     description:
       "Cream-and-gold marble-effect panels behind a floral monogram wreath, flanked by floral columns and a cream loveseat",
     description_ta:
       "கிரீம்-தங்க மார்பிள் பேனல்கள், மலர் மோனோகிராம் மாலை, மலர் தூண்கள் (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2023,
-    image_url: "/images/gallery/landscape/w-005-land.jpg",
+    image_url: "/images/gallery/reception/r-005-land.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
     sort_order: 5,
   },
   {
-    id: "w-006",
+    id: "r-006",
     title: "White Floral Arch Stage",
     title_ta: "வெள்ளை மலர் வளைவு மேடை (வரைவு)",
     description:
       "White draped backdrop with a floral arch monogram, cream tufted loveseat, and a soft blue-and-cream flower bed",
     description_ta:
       "வெள்ளை திரை பின்னணி, மலர் வளைவு மோனோகிராம், மென் நீலம்-கிரீம் மலர் படுக்கை (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2024,
-    image_url: "/images/gallery/landscape/w-006-land.jpg",
+    image_url: "/images/gallery/reception/r-006-land.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
     sort_order: 6,
   },
   {
-    id: "w-007",
+    id: "r-007",
     title: "Burgundy Jali Panel Stage",
     title_ta: "பர்கண்டி ஜாலி பேனல் மேடை (வரைவு)",
     description:
       "Burgundy dried-floral fringe ceiling over gold jali-cut wall panels, red-and-white floral wall accents, and a carved wooden sofa",
     description_ta:
       "பர்கண்டி உலர் மலர் மேற்கூரை, தங்க ஜாலி பேனல்கள், சிவப்பு-வெள்ளை மலர் சுவர் (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2024,
-    image_url: "/images/gallery/landscape/w-007-land.jpg",
+    image_url: "/images/gallery/reception/r-007-land.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
     sort_order: 7,
   },
   {
-    id: "w-008",
+    id: "r-008",
     title: "Tropical Leaf Fan Backdrop",
     title_ta: "வெப்பமண்டல இலை விசிறி பின்னணி (வரைவு)",
     description:
       "A dramatic fan of tropical green leaves lit with string lights behind a carved wooden bench, framed by cream drapes and a white flower border",
     description_ta:
       "வெப்பமண்டல பச்சை இலை விசிறி பின்னணி, செதுக்கல் மர இருக்கை, வெள்ளை மலர் எல்லை (வரைவு மொழிபெயர்ப்பு)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2023,
-    image_url: "/images/gallery/landscape/w-008-land1.jpg",
+    image_url: "/images/gallery/reception/r-008-land1.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
     sort_order: 8,
   },
   {
-    id: "w-009",
+    id: "r-009",
     title: "Green Wall Floral Scallop Stage",
     title_ta: "பச்சை சுவர் மலர் வளைவு மேடை (வரைவு)",
     description:
       "A living green wall backdrop with crystal chandeliers, cream-lavender floral scalloped arches, and a plum velvet loveseat",
     description_ta:
       "பச்சை சுவர் பின்னணி, படிக சரவிளக்குகள், கிரீம்-லாவெண்டர் மலர் வளைவுகள் (வரைவு மொழிபெயர்ப்பு — உறுதிப்படுத்தப்படவில்லை)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2025,
-    image_url: "/images/gallery/landscape/w-009-land1.jpg",
+    image_url: "/images/gallery/reception/r-009-land1.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
-    sort_order: 13,
+    sort_order: 9,
   },
   {
-    id: "w-010",
+    id: "r-010",
     title: "Red Rose Monogram Stage",
     title_ta: "சிவப்பு ரோஜா மோனோகிராம் மேடை (வரைவு)",
     description:
       "Red and white rose-covered archways framing a couple's monogram medallion, gold drapes, and a cream loveseat",
     description_ta:
       "சிவப்பு-வெள்ளை ரோஜா வளைவுகள், தம்பதியர் மோனோகிராம், தங்க திரைகள் (வரைவு மொழிபெயர்ப்பு — உறுதிப்படுத்தப்படவில்லை)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2025,
-    image_url: "/images/gallery/landscape/w-010-land1.jpg",
+    image_url: "/images/gallery/reception/r-010-land1.jpg",
     width: 1867,
     height: 1245,
     is_featured: false,
-    sort_order: 14,
+    sort_order: 10,
   },
   {
-    id: "w-011",
+    id: "r-011",
     title: "Floral Light Arch Backdrop",
     title_ta: "மலர் ஒளி வளைவு பின்னணி (வரைவு)",
     description:
       "Pastel pink and lavender floral arches paired with illuminated light rings, framing a cream loveseat",
     description_ta:
       "இளஞ்சிவப்பு, லாவெண்டர் மலர் வளைவுகள், ஒளி வளையங்கள் (வரைவு மொழிபெயர்ப்பு — உறுதிப்படுத்தப்படவில்லை)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2025,
-    image_url: "/images/gallery/wide/w-011-wide1.jpg",
+    image_url: "/images/gallery/reception/r-011-wide1.jpg",
     width: 2077,
     height: 1170,
     is_featured: false,
-    sort_order: 15,
+    sort_order: 11,
   },
   {
-    id: "w-012",
+    id: "r-012",
     title: "Floral Entrance Walkway",
     title_ta: "மலர் நுழைவு நடைபாதை (வரைவு)",
     description:
       "A flower-strand ceiling and lit archway lead down a plum carpet aisle, lined with white floral urns, toward the mandap beyond",
     description_ta:
       "மலர் இழை மேற்கூரை, ஒளி வளைவு, ஊதா கம்பள பாதை, வெள்ளை மலர் குடங்கள் (வரைவு மொழிபெயர்ப்பு — உறுதிப்படுத்தப்படவில்லை)",
-    event_type: "wedding",
+    event_type: "reception",
     year: 2025,
-    image_url: "/images/gallery/wide/w-012-wide1.jpg",
+    image_url: "/images/gallery/reception/r-012-wide1.jpg",
     width: 2080,
     height: 1170,
     is_featured: false,
-    sort_order: 16,
+    sort_order: 12,
   },
   // Corporate items (4 entries)
   {
@@ -228,7 +233,7 @@ export const galleryItems: GalleryItem[] = [
     width: 1200,
     height: 800,
     is_featured: true,
-    sort_order: 9,
+    sort_order: 13,
   },
   {
     id: "c-002",
@@ -244,7 +249,7 @@ export const galleryItems: GalleryItem[] = [
     width: 1200,
     height: 900,
     is_featured: false,
-    sort_order: 10,
+    sort_order: 14,
   },
   // Temple items (3 entries) — displayed as "Spiritual" (event_type stays "temple")
   {
@@ -261,7 +266,7 @@ export const galleryItems: GalleryItem[] = [
     width: 1200,
     height: 800,
     is_featured: true,
-    sort_order: 11,
+    sort_order: 15,
   },
   {
     id: "t-002",
@@ -277,7 +282,7 @@ export const galleryItems: GalleryItem[] = [
     width: 900,
     height: 1200,
     is_featured: false,
-    sort_order: 12,
+    sort_order: 16,
   },
 ];
 
