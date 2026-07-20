@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
 import type { LightboxItem } from "@/components/gallery/Lightbox";
 
 interface LightboxThumbnailStripProps {
@@ -97,21 +98,14 @@ export function LightboxThumbnailStrip({ items, index, onSelect }: LightboxThumb
                   transition: "opacity 150ms ease-out, border-color 150ms ease-out",
                 }}
               >
-                {/* Plain <img>, not next/image: these are already-decoded
-                    tiny crops of images loaded elsewhere in the lightbox,
-                    so there's no size-optimization benefit, and a plain
-                    element keeps the onError fallback simple and direct. */}
-                <img
+                <ImageWithFallback
                   src={item.src}
                   alt=""
                   aria-hidden="true"
                   width={w}
                   height={h}
+                  fallbackSrc={THUMBNAIL_FALLBACK}
                   className="h-full w-full object-cover"
-                  onError={(event) => {
-                    event.currentTarget.onerror = null;
-                    event.currentTarget.src = THUMBNAIL_FALLBACK;
-                  }}
                 />
               </span>
               <span
