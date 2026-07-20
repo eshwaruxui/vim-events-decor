@@ -94,7 +94,7 @@ export function CaseStudyDetail({ caseStudy }: CaseStudyDetailProps) {
       </div>
 
       <div className="mx-auto mt-4 max-w-6xl px-4 sm:px-6">
-        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-maroon">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-maroon">
           {caseStudy.hero_image_url ? (
             <ImageWithFallback
               src={caseStudy.hero_image_url}

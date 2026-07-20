@@ -5,6 +5,7 @@ import { localize } from "@/lib/localize";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import type { GalleryItem } from "@/lib/data/gallery";
 import type { TranslationKey } from "@/lib/translations";
+import { galleryBlurPlaceholders } from "@/lib/data/galleryBlurPlaceholders";
 
 const EVENT_TYPE_KEY: Record<GalleryItem["event_type"], TranslationKey> = {
   wedding: "gallery.filterWedding",
@@ -22,24 +23,26 @@ interface GalleryCardProps {
 export function GalleryCard({ item, priority = false, onClick }: GalleryCardProps) {
   const { language, t } = useLanguage();
   const title = localize(language, item.title, item.title_ta);
+  const cover = item.images[item.coverIndex];
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className="group relative mb-3 block w-full break-inside-avoid overflow-hidden rounded-lg text-left"
+      className="group relative mb-3 block w-full break-inside-avoid overflow-hidden rounded-2xl text-left transition-[width] duration-200 ease-out"
     >
       <span className="absolute right-2 top-2 z-10 rounded-full bg-cream/85 px-2.5 py-1 text-[11px] font-medium tracking-wide text-maroon">
         {t(EVENT_TYPE_KEY[item.event_type])}
       </span>
 
       <ImageWithFallback
-        src={item.image_url}
+        src={cover.url}
         alt={title}
-        width={item.width}
-        height={item.height}
+        width={cover.width}
+        height={cover.height}
         priority={priority}
         loading={priority ? undefined : "lazy"}
+        blurDataURL={galleryBlurPlaceholders[cover.url]}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         className="w-full transform-gpu transition-transform duration-300 ease-out group-hover:scale-[1.03]"
       />

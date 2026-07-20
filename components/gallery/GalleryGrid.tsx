@@ -7,6 +7,15 @@ import { GalleryCard } from "@/components/gallery/GalleryCard";
 import { Lightbox, type LightboxItem } from "@/components/gallery/Lightbox";
 import type { GalleryItem } from "@/lib/data/gallery";
 import type { TranslationKey } from "@/lib/translations";
+import { galleryBlurPlaceholders } from "@/lib/data/galleryBlurPlaceholders";
+
+// Heuristic for "first visible row": the largest breakpoint shows 3
+// masonry columns (see the `lg:columns-3` class below), so the first 3
+// items in source order are the most likely to be above the fold across
+// breakpoints. CSS multi-column layout doesn't expose real row/viewport
+// info to prioritize against precisely without client-side measurement,
+// which would cost more than it saves here.
+const PRIORITY_ROW_COUNT = 3;
 
 const PAGE_SIZE = 12;
 
@@ -29,7 +38,8 @@ export function GalleryGrid({ items }: GalleryGridProps) {
   const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [fading, setFading] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightboxItemId, setLightboxItemId] = useState<string | null>(null);
+  const [lightboxPhotoIndex, setLightboxPhotoIndex] = useState(0);
 
   const filteredItems = useMemo(() => {
     const filtered =
@@ -42,18 +52,37 @@ export function GalleryGrid({ items }: GalleryGridProps) {
   const visibleItems = filteredItems.slice(0, visibleCount);
   const hasMore = visibleCount < filteredItems.length;
 
-  const lightboxItems: LightboxItem[] = useMemo(
-    () =>
-      visibleItems.map((item) => ({
-        id: item.id,
-        src: item.image_url,
-        width: item.width,
-        height: item.height,
-        title: localize(language, item.title, item.title_ta),
-        description: localize(language, item.description, item.description_ta),
-      })),
-    [visibleItems, language]
-  );
+  const lightboxSourceItem = lightboxItemId
+    ? filteredItems.find((item) => item.id === lightboxItemId) ?? null
+    : null;
+
+  const lightboxItems: LightboxItem[] = useMemo(() => {
+    if (!lightboxSourceItem) return [];
+    const title = localize(language, lightboxSourceItem.title, lightboxSourceItem.title_ta);
+    const description = localize(
+      language,
+      lightboxSourceItem.description,
+      lightboxSourceItem.description_ta
+    );
+    return lightboxSourceItem.images.map((image, i) => ({
+      id: `${lightboxSourceItem.id}-${i}`,
+      src: image.url,
+      width: image.width,
+      height: image.height,
+      blurDataURL: galleryBlurPlaceholders[image.url],
+      title,
+      description,
+    }));
+  }, [lightboxSourceItem, language]);
+
+  function openLightbox(item: GalleryItem) {
+    setLightboxItemId(item.id);
+    setLightboxPhotoIndex(item.coverIndex);
+  }
+
+  function closeLightbox() {
+    setLightboxItemId(null);
+  }
 
   function handleFilterChange(next: FilterValue) {
     if (next === activeFilter) return;
@@ -100,8 +129,8 @@ export function GalleryGrid({ items }: GalleryGridProps) {
               <GalleryCard
                 key={item.id}
                 item={item}
-                priority={i < 4}
-                onClick={() => setLightboxIndex(i)}
+                priority={i < PRIORITY_ROW_COUNT}
+                onClick={() => openLightbox(item)}
               />
             ))}
           </div>
@@ -120,12 +149,12 @@ export function GalleryGrid({ items }: GalleryGridProps) {
         </div>
       )}
 
-      {lightboxIndex !== null && (
+      {lightboxSourceItem && (
         <Lightbox
           items={lightboxItems}
-          index={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-          onNavigate={setLightboxIndex}
+          index={lightboxPhotoIndex}
+          onClose={closeLightbox}
+          onNavigate={setLightboxPhotoIndex}
         />
       )}
     </div>

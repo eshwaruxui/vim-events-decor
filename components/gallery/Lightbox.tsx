@@ -10,6 +10,7 @@ export interface LightboxItem {
   src: string;
   width: number;
   height: number;
+  blurDataURL?: string;
   title: string;
   description?: string;
 }
@@ -87,6 +88,25 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, items.length]);
 
+  useEffect(() => {
+    // Preload only the immediate neighbors, not the whole event's photo
+    // set — keeps navigation snappy without fetching images the visitor
+    // may never scroll to.
+    const neighbors = [items[index - 1], items[index + 1]].filter(
+      (neighbor): neighbor is LightboxItem => Boolean(neighbor)
+    );
+    const preloaded = neighbors.map((neighbor) => {
+      const img = new window.Image();
+      img.src = neighbor.src;
+      return img;
+    });
+    return () => {
+      preloaded.forEach((img) => {
+        img.src = "";
+      });
+    };
+  }, [items, index]);
+
   if (!item) return null;
 
   return (
@@ -138,6 +158,15 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
         </button>
       )}
 
+      {/* The wrapper is a pure flex-centering box, not a clip boundary — it
+          intentionally has no overflow/radius of its own. Clipping lives on
+          the <img> itself: a replaced element's own border-radius always
+          clips its own painted content, so there's no wrapper-vs-image
+          size mismatch possible (that mismatch — from the wrapper's
+          independently-computed max-h/max-w drifting from the image's
+          actual rendered box at different aspect ratios/viewport sizes —
+          was the real bug behind the "works small, vanishes large"
+          inconsistency, not a clipping failure). */}
       <div className="relative flex max-h-[85vh] max-w-[90vw] items-center justify-center">
         <ImageWithFallback
           key={item.id}
@@ -145,8 +174,9 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
           alt={item.title}
           width={item.width}
           height={item.height}
+          blurDataURL={item.blurDataURL}
           sizes="90vw"
-          className="max-h-[85vh] max-w-[90vw] object-contain"
+          className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain"
         />
       </div>
 

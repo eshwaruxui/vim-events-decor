@@ -1,41 +1,112 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useLanguage, type Language } from "@/context/LanguageContext";
 
-const OPTIONS: { value: Language; label: string }[] = [
-  { value: "en", label: "EN" },
+const TAMIL_OPTIONS: { value: Language; label: string }[] = [
   { value: "ta", label: "தமிழ்" },
   { value: "ta-native", label: "செந்தமிழ்" },
   { value: "ta-modern", label: "Tanglish" },
 ];
 
+const TAMIL_VALUES: Language[] = ["ta", "ta-native", "ta-modern"];
+
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const isTamilActive = TAMIL_VALUES.includes(language);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    function onPointerDown(event: PointerEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setMenuOpen(false);
+    }
+    window.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
 
   return (
     <div
       role="group"
       aria-label="Choose language"
-      className="flex flex-wrap items-center justify-center gap-1 rounded-full border border-gold-light/40 bg-white/40 p-1"
+      className="flex items-center gap-1 rounded-full border border-gold-light/40 bg-white/40 p-1"
     >
-      {OPTIONS.map((option) => {
-        const isActive = language === option.value;
-        return (
-          <button
-            key={option.value}
-            type="button"
-            onClick={() => setLanguage(option.value)}
-            aria-pressed={isActive}
-            className={`rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors ${
-              isActive
-                ? "bg-maroon text-cream"
-                : "text-maroon hover:bg-maroon/10"
-            }`}
+      <button
+        type="button"
+        onClick={() => {
+          setLanguage("en");
+          setMenuOpen(false);
+        }}
+        aria-pressed={language === "en"}
+        className={`rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors ${
+          language === "en" ? "bg-maroon text-cream" : "text-maroon hover:bg-maroon/10"
+        }`}
+      >
+        EN
+      </button>
+
+      <div ref={containerRef} className="relative">
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-haspopup="true"
+          aria-expanded={menuOpen}
+          className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors ${
+            isTamilActive ? "bg-maroon text-cream" : "text-maroon hover:bg-maroon/10"
+          }`}
+        >
+          தமிழ்
+          <svg
+            viewBox="0 0 12 12"
+            className={`h-2.5 w-2.5 transition-transform ${menuOpen ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            {option.label}
-          </button>
-        );
-      })}
+            <path d="M3 4.5l3 3 3-3" />
+          </svg>
+        </button>
+
+        {menuOpen && (
+          <div
+            role="menu"
+            className="absolute right-0 top-full z-20 mt-1 min-w-[7rem] overflow-hidden rounded-lg border border-gold-light/40 bg-cream shadow-lg"
+          >
+            {TAMIL_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                role="menuitemradio"
+                onClick={() => {
+                  setLanguage(option.value);
+                  setMenuOpen(false);
+                }}
+                aria-checked={language === option.value}
+                className={`block w-full px-3 py-2 text-left text-xs font-medium tracking-wide transition-colors ${
+                  language === option.value
+                    ? "bg-maroon text-cream"
+                    : "text-maroon hover:bg-maroon/10"
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

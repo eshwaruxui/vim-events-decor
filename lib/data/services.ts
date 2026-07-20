@@ -315,8 +315,8 @@ export const serviceCategories: Service[] = [
   },
   {
     id: "sacred",
-    category: "Sacred Spaces",
-    category_ta: "புனிதமான இடங்கள்",
+    category: "Spiritual",
+    category_ta: "ஆன்மிகம்",
     category_icon: "☸",
     services: [
       {

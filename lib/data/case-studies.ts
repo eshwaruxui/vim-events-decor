@@ -141,7 +141,12 @@ export const caseStudies: CaseStudy[] = [
       "/images/case-studies/cs-003-c.jpg",
       "/images/case-studies/cs-003-d.jpg",
     ],
-    published: true,
+    // Unpublished: this describes a tender VIM is bidding for, not a
+    // completed project — presenting it as a finished case study would be
+    // misleading to a tender officer who might see this page. Flip back
+    // to true if the tender is won and this becomes a legitimate case
+    // study.
+    published: false,
   },
 ];
 

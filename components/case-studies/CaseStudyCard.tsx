@@ -35,7 +35,7 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
   return (
     <Link
       href={`/case-studies/${caseStudy.slug}`}
-      className="group block overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md"
+      className="group block overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md"
     >
       <div className="relative aspect-video w-full overflow-hidden">
         <span
