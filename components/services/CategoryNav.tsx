@@ -44,17 +44,35 @@ export function CategoryNav({ categories }: CategoryNavProps) {
   }, [categories]);
 
   useEffect(() => {
-    const activeLink = navRef.current?.querySelector<HTMLAnchorElement>(
-      `a[href="#${activeId}"]`
-    );
-    activeLink?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    const nav = navRef.current;
+    const activeLink = nav?.querySelector<HTMLAnchorElement>(`a[href="#${activeId}"]`);
+    if (!nav || !activeLink) return;
+
+    // Skip entirely if the pill is already visible — avoids firing a scroll
+    // adjustment (and any of its side effects) on every intersection
+    // update when it isn't actually needed.
+    const navRect = nav.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    const alreadyVisible = linkRect.left >= navRect.left && linkRect.right <= navRect.right;
+    if (alreadyVisible) return;
+
+    // `behavior: "smooth"` here previously caused a real mobile bug: this
+    // effect re-runs continuously as the user scrolls (driven by the
+    // IntersectionObserver above), and an animated scrollIntoView on a
+    // nested horizontal scroller inside a `position: sticky` ancestor can
+    // steal the touch-scroll gesture from the page on iOS/Android,
+    // making the page feel like it "stops scrolling" after a couple of
+    // swipes. An instant (`"auto"`) scroll completes within one frame and
+    // doesn't compete with an in-progress touch gesture the way a
+    // multi-frame animation does.
+    activeLink.scrollIntoView({ block: "nearest", inline: "center", behavior: "auto" });
   }, [activeId]);
 
   return (
     <nav
       ref={navRef}
       aria-label="Service categories"
-      className="no-print scrollbar-hide sticky top-[57px] z-20 -mx-4 flex max-h-14 gap-2 overflow-x-auto bg-cream/95 px-4 py-3 backdrop-blur sm:top-[65px] lg:sticky lg:top-24 lg:mx-0 lg:max-h-none lg:flex-col lg:overflow-visible lg:bg-transparent lg:p-0 lg:backdrop-blur-none"
+      className="no-print scrollbar-hide sticky top-[57px] z-20 -mx-4 flex max-h-14 touch-pan-x gap-2 overflow-x-auto bg-cream/95 px-4 py-3 backdrop-blur sm:top-[65px] lg:sticky lg:top-24 lg:mx-0 lg:max-h-none lg:flex-col lg:touch-auto lg:overflow-visible lg:bg-transparent lg:p-0 lg:backdrop-blur-none"
     >
       {categories.map((category) => {
         const isActive = category.id === activeId;
