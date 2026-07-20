@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useSwipe } from "@/hooks/useSwipe";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
+import { LightboxThumbnailStrip } from "@/components/gallery/LightboxThumbnailStrip";
 
 export interface LightboxItem {
   id: string;
@@ -30,6 +31,11 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
   const item = items[index];
   const hasPrev = index > 0;
   const hasNext = index < items.length - 1;
+  // Single-image events have nothing to browse — the strip/counter would
+  // just be dead weight, so they're skipped entirely rather than rendered
+  // empty or with one inert dot. Driven by the actual array length, not
+  // any per-event/category special-casing, so it applies uniformly.
+  const showStrip = items.length > 1;
 
   const goPrev = () => hasPrev && onNavigate(index - 1);
   const goNext = () => hasNext && onNavigate(index + 1);
@@ -115,7 +121,7 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
       role="dialog"
       aria-modal="true"
       aria-label={item.title}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 px-4 pb-6"
+      className="fixed inset-0 z-50 flex flex-col bg-black/90"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
       onTouchStart={swipeHandlers.onTouchStart}
       onTouchEnd={swipeHandlers.onTouchEnd}
@@ -132,60 +138,85 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
         </svg>
       </button>
 
-      {hasPrev && (
-        <button
-          type="button"
-          onClick={goPrev}
-          aria-label={t("gallery.lightboxPrev")}
-          className="absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 sm:left-4"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-      )}
+      {/* Arrows always render — never disappear — but go visually inert at
+          either end of the sequence, per spec: disappearing controls are
+          disorienting. */}
+      <button
+        type="button"
+        onClick={goPrev}
+        aria-label={t("gallery.lightboxPrev")}
+        aria-disabled={!hasPrev}
+        disabled={!hasPrev}
+        className={`absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors sm:left-4 ${
+          hasPrev ? "hover:bg-white/20" : "cursor-default opacity-30"
+        }`}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
 
-      {hasNext && (
-        <button
-          type="button"
-          onClick={goNext}
-          aria-label={t("gallery.lightboxNext")}
-          className="absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 sm:right-4"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-            <path d="M9 6l6 6-6 6" />
-          </svg>
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={goNext}
+        aria-label={t("gallery.lightboxNext")}
+        aria-disabled={!hasNext}
+        disabled={!hasNext}
+        className={`absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors sm:right-4 ${
+          hasNext ? "hover:bg-white/20" : "cursor-default opacity-30"
+        }`}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
 
-      {/* The wrapper is a pure flex-centering box, not a clip boundary — it
-          intentionally has no overflow/radius of its own. Clipping lives on
-          the <img> itself: a replaced element's own border-radius always
-          clips its own painted content, so there's no wrapper-vs-image
-          size mismatch possible (that mismatch — from the wrapper's
-          independently-computed max-h/max-w drifting from the image's
-          actual rendered box at different aspect ratios/viewport sizes —
-          was the real bug behind the "works small, vanishes large"
-          inconsistency, not a clipping failure). */}
-      <div className="relative flex max-h-[85vh] max-w-[90vw] items-center justify-center">
-        <ImageWithFallback
-          key={item.id}
-          src={item.src}
-          alt={item.title}
-          width={item.width}
-          height={item.height}
-          blurDataURL={item.blurDataURL}
-          sizes="90vw"
-          className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain"
-        />
+      {/* Main image area: grows to fill available space but is never
+          crushed below 200px, even if the caption/counter/strip below it
+          are tall (e.g. a cramped landscape phone viewport). */}
+      <div className="flex min-h-[200px] flex-1 items-center justify-center overflow-hidden px-4 pt-4">
+        {/* Wrapper fills 100% of whatever height flexbox actually gives
+            the area above (which already accounts for the caption/
+            counter/strip below, and the 200px floor) — no hardcoded
+            pixel guess needed, and it's automatically correct whether
+            those siblings are present or not (e.g. single-image events
+            with no strip). Not a clip boundary itself: clipping lives on
+            the <img>, since a replaced element's own border-radius
+            always clips its own painted content, so there's no
+            wrapper-vs-image size mismatch possible (that mismatch was
+            the real bug behind an earlier "works small, vanishes large"
+            corner-radius inconsistency, not a clipping failure). */}
+        <div className="relative flex h-full max-w-[90vw] items-center justify-center">
+          <ImageWithFallback
+            key={item.id}
+            src={item.src}
+            alt={item.title}
+            width={item.width}
+            height={item.height}
+            blurDataURL={item.blurDataURL}
+            sizes="90vw"
+            className="max-h-full max-w-[90vw] rounded-2xl object-contain"
+          />
+        </div>
       </div>
 
-      <div className="mt-4 max-w-xl text-center">
-        <p className="font-display text-lg italic text-white">{item.title}</p>
-        {item.description && (
-          <p className="mt-1 font-body text-sm text-white/70">{item.description}</p>
-        )}
-      </div>
+      {item.title && (
+        <div className="shrink-0 px-4 pb-3 pt-4 text-center">
+          <p className="font-display text-lg italic text-white">{item.title}</p>
+          {item.description && (
+            <p className="mt-1 font-body text-sm text-white/70">{item.description}</p>
+          )}
+        </div>
+      )}
+
+      {showStrip && (
+        <>
+          <p className="shrink-0 pb-2 text-center font-body text-sm font-light text-gold">
+            {index + 1} / {items.length}
+          </p>
+          <LightboxThumbnailStrip items={items} index={index} onSelect={onNavigate} />
+        </>
+      )}
     </div>
   );
 }
