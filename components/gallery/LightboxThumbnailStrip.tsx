@@ -88,6 +88,7 @@ export function LightboxThumbnailStrip({ items, index, onSelect }: LightboxThumb
                 scrollSnapAlign: "center",
               }}
             >
+              {/* VIM standard: ease-in-out var(--ease-vim) */}
               <span
                 className="block overflow-hidden rounded-md"
                 style={{
@@ -95,7 +96,7 @@ export function LightboxThumbnailStrip({ items, index, onSelect }: LightboxThumb
                   height: h,
                   opacity: isActive ? 1 : 0.45,
                   border: isActive ? "2px solid #C9A96E" : "2px solid transparent",
-                  transition: "opacity 150ms ease-out, border-color 150ms ease-out",
+                  transition: "opacity var(--duration-fast) var(--ease-vim), border-color var(--duration-fast) var(--ease-vim)",
                 }}
               >
                 <ImageWithFallback

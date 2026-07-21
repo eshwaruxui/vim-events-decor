@@ -5,6 +5,13 @@
 :root {
   --gold-soft: rgba(201, 169, 110, 0.55);
   --gold-line: rgba(201, 169, 110, 0.4);
+
+  /* VIM motion system — see docs/MOTION.md. Every interactive transition
+     site-wide should reference these, not a one-off duration/curve. */
+  --ease-vim: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 350ms;
 }
 
 html {
@@ -33,6 +40,10 @@ body {
 }
 
 /* ---------- Entrance animation ---------- */
+/* Exception to the VIM ease-in-out standard (see docs/MOTION.md): this is
+   a one-shot page-load reveal, not an interactive transition, and wants a
+   more dramatic decelerate-only curve for the "settling into place" feel.
+   Interactive elements should use var(--ease-vim) instead. */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -51,6 +62,77 @@ body {
     opacity: 1;
     transform: none;
     animation: none;
+  }
+}
+
+/* ---------- VIM standard entrance fade (menus, lightbox) ---------- */
+/* VIM standard: ease-in-out var(--ease-vim) */
+@keyframes vim-fade-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-vim-in {
+  animation: vim-fade-scale-in var(--duration-fast) var(--ease-vim);
+}
+.animate-vim-in-slow {
+  animation: vim-fade-scale-in var(--duration-slow) var(--ease-vim);
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-vim-in,
+  .animate-vim-in-slow {
+    animation: none;
+  }
+}
+
+/* ---------- FAB — Space UI frosted glass ---------- */
+/* VIM standard: ease-in-out var(--ease-vim). Shared by WhatsAppFloat and
+   BackToTop — both are circular glass FABs, so the look/feel lives here
+   once rather than duplicated per component. */
+.fab-glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.18),
+    0 1px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition:
+    background-color var(--duration-fast) var(--ease-vim),
+    box-shadow var(--duration-fast) var(--ease-vim),
+    transform var(--duration-fast) var(--ease-vim);
+}
+.fab-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.22),
+    0 1px 4px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  transform: scale(1.05);
+}
+.fab-glass:active {
+  transform: scale(0.96);
+}
+/* No backdrop-filter support: fall back to a dark semi-opaque circle so
+   the icon stays readable instead of nearly invisible. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .fab-glass {
+    background: rgba(30, 20, 10, 0.72);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab-glass {
+    transition: background-color var(--duration-fast) var(--ease-vim);
+  }
+  .fab-glass:hover,
+  .fab-glass:active {
+    transform: none;
   }
 }
 

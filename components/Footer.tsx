@@ -15,7 +15,8 @@ export function Footer() {
         href="https://www.eswarcreatives.in"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-maroon underline decoration-transparent underline-offset-2 transition-colors hover:decoration-gold"
+        // VIM standard: ease-in-out var(--ease-vim)
+        className="text-maroon underline decoration-transparent underline-offset-2 transition-colors duration-fast ease-vim hover:decoration-gold"
       >
         {t("footer.credit")}
       </a>

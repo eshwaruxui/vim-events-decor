@@ -49,7 +49,8 @@ export function LanguageToggle() {
           setMenuOpen(false);
         }}
         aria-pressed={language === "en"}
-        className={`rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors ${
+        // VIM standard: ease-in-out var(--ease-vim)
+        className={`rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors duration-fast ease-vim ${
           language === "en" ? "bg-maroon text-cream" : "text-maroon hover:bg-maroon/10"
         }`}
       >
@@ -62,14 +63,16 @@ export function LanguageToggle() {
           onClick={() => setMenuOpen((open) => !open)}
           aria-haspopup="true"
           aria-expanded={menuOpen}
-          className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors ${
+          // VIM standard: ease-in-out var(--ease-vim)
+          className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors duration-fast ease-vim ${
             isTamilActive ? "bg-maroon text-cream" : "text-maroon hover:bg-maroon/10"
           }`}
         >
           தமிழ்
+          {/* VIM standard: ease-in-out var(--ease-vim) */}
           <svg
             viewBox="0 0 12 12"
-            className={`h-2.5 w-2.5 transition-transform ${menuOpen ? "rotate-180" : ""}`}
+            className={`h-2.5 w-2.5 transition-transform duration-fast ease-vim ${menuOpen ? "rotate-180" : ""}`}
             fill="none"
             stroke="currentColor"
             strokeWidth={1.5}
@@ -83,7 +86,7 @@ export function LanguageToggle() {
         {menuOpen && (
           <div
             role="menu"
-            className="absolute right-0 top-full z-20 mt-1 min-w-[7rem] overflow-hidden rounded-lg border border-gold-light/40 bg-cream shadow-lg"
+            className="animate-vim-in absolute right-0 top-full z-20 mt-1 min-w-[7rem] origin-top-right overflow-hidden rounded-lg border border-gold-light/40 bg-cream shadow-lg"
           >
             {TAMIL_OPTIONS.map((option) => (
               <button
@@ -95,7 +98,8 @@ export function LanguageToggle() {
                   setMenuOpen(false);
                 }}
                 aria-checked={language === option.value}
-                className={`block w-full px-3 py-2 text-left text-xs font-medium tracking-wide transition-colors ${
+                // VIM standard: ease-in-out var(--ease-vim)
+                className={`block w-full px-3 py-2 text-left text-xs font-medium tracking-wide transition-colors duration-fast ease-vim ${
                   language === option.value
                     ? "bg-maroon text-cream"
                     : "text-maroon hover:bg-maroon/10"

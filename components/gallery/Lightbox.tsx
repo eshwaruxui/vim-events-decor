@@ -121,7 +121,11 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
       role="dialog"
       aria-modal="true"
       aria-label={item.title}
-      className="fixed inset-0 z-50 flex flex-col bg-black/90"
+      // VIM standard: ease-in-out var(--ease-vim). Entrance-only — no exit
+      // fade, since the images/index this dialog renders are cleared by
+      // the parent the instant it closes and there's nothing to hold a
+      // stale frame with (see docs/MOTION.md for the tier rationale).
+      className="animate-vim-in-slow fixed inset-0 z-50 flex flex-col bg-black/90"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
       onTouchStart={swipeHandlers.onTouchStart}
       onTouchEnd={swipeHandlers.onTouchEnd}
@@ -131,7 +135,8 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
         type="button"
         onClick={onClose}
         aria-label={t("gallery.lightboxClose")}
-        className="absolute right-4 top-[calc(env(safe-area-inset-top)+1rem)] z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+        // VIM standard: ease-in-out var(--ease-vim)
+        className="absolute right-4 top-[calc(env(safe-area-inset-top)+1rem)] z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-fast ease-vim hover:bg-white/20"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="h-5 w-5">
           <path d="M6 6l12 12M18 6L6 18" />
@@ -147,7 +152,8 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
         aria-label={t("gallery.lightboxPrev")}
         aria-disabled={!hasPrev}
         disabled={!hasPrev}
-        className={`absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors sm:left-4 ${
+        // VIM standard: ease-in-out var(--ease-vim)
+        className={`absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-fast ease-vim sm:left-4 ${
           hasPrev ? "hover:bg-white/20" : "cursor-default opacity-30"
         }`}
       >
@@ -162,7 +168,8 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
         aria-label={t("gallery.lightboxNext")}
         aria-disabled={!hasNext}
         disabled={!hasNext}
-        className={`absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors sm:right-4 ${
+        // VIM standard: ease-in-out var(--ease-vim)
+        className={`absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-fast ease-vim sm:right-4 ${
           hasNext ? "hover:bg-white/20" : "cursor-default opacity-30"
         }`}
       >

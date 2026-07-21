@@ -172,9 +172,10 @@ export function ContactForm() {
           />
         </Field>
 
+        {/* VIM standard: ease-in-out var(--ease-vim) */}
         <button
           type="submit"
-          className="mt-2 rounded-xl bg-maroon px-6 py-3 font-body text-sm text-cream transition-colors hover:bg-maroon-light"
+          className="mt-2 rounded-xl bg-maroon px-6 py-3 font-body text-sm text-cream transition-colors duration-fast ease-vim hover:bg-maroon-light"
         >
           {t("contact.submit")}
         </button>

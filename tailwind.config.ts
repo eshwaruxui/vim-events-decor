@@ -29,6 +29,17 @@ const config: Config = {
         script: ["Great Vibes", "cursive"],
         body: ["Jost", "sans-serif"],
       },
+      // VIM motion system (docs/MOTION.md) — these read from the same
+      // CSS custom properties in globals.css, so `ease-vim`/`duration-*`
+      // utilities and raw `var(--ease-vim)` usage never drift apart.
+      transitionTimingFunction: {
+        vim: "var(--ease-vim)",
+      },
+      transitionDuration: {
+        fast: "var(--duration-fast)",
+        base: "var(--duration-base)",
+        slow: "var(--duration-slow)",
+      },
     },
   },
   plugins: [],

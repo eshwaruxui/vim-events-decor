@@ -71,13 +71,15 @@ export default function ServicesPage() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-xl border border-cream px-6 py-2.5 font-body text-sm text-cream transition-colors hover:bg-cream hover:text-maroon"
+            // VIM standard: ease-in-out var(--ease-vim)
+            className="inline-flex items-center justify-center rounded-xl border border-cream px-6 py-2.5 font-body text-sm text-cream transition-colors duration-fast ease-vim hover:bg-cream hover:text-maroon"
           >
             {t("services.ctaWhatsApp")}
           </a>
+          {/* VIM standard: ease-in-out var(--ease-vim) */}
           <a
             href={ENQUIRY_MAILTO_URL}
-            className="inline-flex items-center justify-center rounded-xl bg-gold px-6 py-2.5 font-body text-sm text-maroon transition-colors hover:bg-gold-light"
+            className="inline-flex items-center justify-center rounded-xl bg-gold px-6 py-2.5 font-body text-sm text-maroon transition-colors duration-fast ease-vim hover:bg-gold-light"
           >
             {t("services.ctaEnquiry")}
           </a>

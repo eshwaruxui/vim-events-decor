@@ -15,7 +15,8 @@ export function ServiceCard({ service }: ServiceCardProps) {
   const description = localize(language, service.description, service.description_ta);
 
   return (
-    <div className="flex flex-col rounded-lg border border-maroon/10 bg-white p-6 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md">
+    // VIM standard: ease-in-out var(--ease-vim)
+    <div className="flex flex-col rounded-lg border border-maroon/10 bg-white p-6 transition-all duration-fast ease-vim hover:-translate-y-0.5 hover:shadow-md">
       <div className="mb-2 flex flex-wrap items-center gap-2">
         {service.is_featured && (
           <span className="rounded-full border border-gold/40 bg-gold/20 px-2.5 py-0.5 text-[11px] font-medium text-maroon">

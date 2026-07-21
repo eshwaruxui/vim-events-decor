@@ -104,7 +104,8 @@ export function CategoryNav({ categories }: CategoryNavProps) {
             key={category.id}
             href={`#${category.id}`}
             onClick={() => handlePillClick(category.id)}
-            className={`flex flex-none items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 font-body text-sm transition-colors lg:flex-none lg:rounded-lg ${
+            // VIM standard: ease-in-out var(--ease-vim)
+            className={`flex flex-none items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 font-body text-sm transition-colors duration-fast ease-vim lg:flex-none lg:rounded-lg ${
               isActive
                 ? "border-maroon bg-maroon text-cream"
                 : "border-maroon/30 text-ink hover:border-maroon"

@@ -36,9 +36,10 @@ export function ExpandableSection({
         </span>
       </button>
 
+      {/* VIM standard: ease-in-out var(--ease-vim) */}
       <div
         id={panelId}
-        className="cs-section-panel overflow-hidden transition-[max-height] duration-300 ease-in-out"
+        className="cs-section-panel overflow-hidden transition-[max-height] duration-base ease-vim"
         style={{ maxHeight: isOpen ? "500px" : "0px" }}
       >
         <div className="pt-3 font-body text-sm leading-[1.8] text-muted">

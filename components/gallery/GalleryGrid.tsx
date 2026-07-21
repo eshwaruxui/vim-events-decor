@@ -87,11 +87,12 @@ export function GalleryGrid({ items }: GalleryGridProps) {
   function handleFilterChange(next: FilterValue) {
     if (next === activeFilter) return;
     setFading(true);
+    // Matches the grid's own duration-base (250ms) crossfade below.
     window.setTimeout(() => {
       setActiveFilter(next);
       setVisibleCount(PAGE_SIZE);
       setFading(false);
-    }, 150);
+    }, 250);
   }
 
   return (
@@ -105,7 +106,8 @@ export function GalleryGrid({ items }: GalleryGridProps) {
               type="button"
               onClick={() => handleFilterChange(filter.value)}
               aria-pressed={isActive}
-              className={`rounded-full px-4 py-1.5 font-body text-sm transition-colors ${
+              // VIM standard: ease-in-out var(--ease-vim)
+              className={`rounded-full px-4 py-1.5 font-body text-sm transition-colors duration-fast ease-vim ${
                 isActive
                   ? "bg-maroon text-cream"
                   : "border border-maroon/30 text-maroon hover:border-maroon"
@@ -120,8 +122,9 @@ export function GalleryGrid({ items }: GalleryGridProps) {
       {filteredItems.length === 0 ? (
         <GalleryEmptyState />
       ) : (
+        // VIM standard: ease-in-out var(--ease-vim)
         <div
-          className="transition-opacity duration-200 ease-out"
+          className="transition-opacity duration-base ease-vim"
           style={{ opacity: fading ? 0 : 1 }}
         >
           <div className="columns-1 gap-3 sm:columns-2 lg:columns-3">

@@ -29,7 +29,8 @@ export function GalleryCard({ item, priority = false, onClick }: GalleryCardProp
     <button
       type="button"
       onClick={onClick}
-      className="group relative mb-3 block w-full break-inside-avoid overflow-hidden rounded-2xl text-left transition-[width] duration-200 ease-out"
+      // VIM standard: ease-in-out var(--ease-vim)
+      className="group relative mb-3 block w-full break-inside-avoid overflow-hidden rounded-2xl text-left transition-[width] duration-base ease-vim"
     >
       <span className="absolute right-2 top-2 z-10 rounded-full bg-cream/85 px-2.5 py-1 text-[11px] font-medium tracking-wide text-maroon">
         {t(EVENT_TYPE_KEY[item.event_type])}
@@ -44,11 +45,13 @@ export function GalleryCard({ item, priority = false, onClick }: GalleryCardProp
         loading={priority ? undefined : "lazy"}
         blurDataURL={galleryBlurPlaceholders[cover.url]}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="w-full transform-gpu transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+        // VIM standard: ease-in-out var(--ease-vim)
+        className="w-full transform-gpu transition-transform duration-fast ease-vim group-hover:scale-[1.03]"
       />
 
+      {/* VIM standard: ease-in-out var(--ease-vim) */}
       <span
-        className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end bg-gradient-to-t from-black/50 to-transparent p-3 opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+        className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end bg-gradient-to-t from-black/50 to-transparent p-3 opacity-0 transition-opacity duration-fast ease-vim group-hover:opacity-100"
         aria-hidden="true"
       >
         <span className="font-body text-[13px] font-medium text-white">
