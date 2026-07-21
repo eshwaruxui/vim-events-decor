@@ -43,12 +43,15 @@ export function BackToTop() {
       type="button"
       onClick={scrollToTop}
       aria-label="Back to top"
-      className={`no-print fixed right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-maroon shadow-lg shadow-maroon/20 transition-opacity duration-200 hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon ${bottomClass} ${
+      // VIM standard: ease-in-out var(--ease-vim) (the fade itself; hover/
+      // active transforms live on .fab-glass in globals.css)
+      className={`fab-glass no-print fixed right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full transition-opacity duration-base ease-vim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon ${bottomClass} ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6" aria-hidden="true">
-        <path d="M6 15l6-6 6 6" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C9A96E" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden="true">
+        <path d="M12 19V5" />
+        <path d="M6 11l6-6 6 6" />
       </svg>
     </button>
   );
