@@ -19,6 +19,9 @@ export function CategoryNav({ categories }: CategoryNavProps) {
   const { language } = useLanguage();
   const [activeId, setActiveId] = useState(categories[0]?.id ?? "");
   const navRef = useRef<HTMLElement>(null);
+  // Not state — this only needs to be read inside event handlers, and
+  // making it state would re-run effects/re-render on every touch.
+  const isTouchingRef = useRef(false);
 
   useEffect(() => {
     const sections = categories
@@ -33,6 +36,14 @@ export function CategoryNav({ categories }: CategoryNavProps) {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible.length > 0) {
+          // Highlight-only — this must never trigger a programmatic
+          // scroll. Confirmed on a real iPhone: it's not the "smooth"
+          // animation that was the problem (switching to "auto" didn't
+          // fix it either) — ANY scrollIntoView call fired on a nested
+          // horizontal scroller inside this sticky nav, while the page
+          // is mid-touch-scroll, steals the gesture from iOS Safari's
+          // touch recognizer and snaps the page back. So this callback
+          // now only ever sets state; it never touches scroll position.
           setActiveId(visible[0].target.id);
         }
       },
@@ -45,34 +56,46 @@ export function CategoryNav({ categories }: CategoryNavProps) {
 
   useEffect(() => {
     const nav = navRef.current;
-    const activeLink = nav?.querySelector<HTMLAnchorElement>(`a[href="#${activeId}"]`);
-    if (!nav || !activeLink) return;
+    if (!nav) return;
+    function onTouchStart() {
+      isTouchingRef.current = true;
+    }
+    function onTouchEnd() {
+      // Small delay rather than clearing immediately: on mobile the
+      // click event following a tap's touchend can still land within
+      // the same gesture — this keeps the guard active through that
+      // window rather than closing it a frame too early.
+      window.setTimeout(() => {
+        isTouchingRef.current = false;
+      }, 100);
+    }
+    nav.addEventListener("touchstart", onTouchStart, { passive: true });
+    nav.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      nav.removeEventListener("touchstart", onTouchStart);
+      nav.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []);
 
-    // Skip entirely if the pill is already visible — avoids firing a scroll
-    // adjustment (and any of its side effects) on every intersection
-    // update when it isn't actually needed.
-    const navRect = nav.getBoundingClientRect();
-    const linkRect = activeLink.getBoundingClientRect();
-    const alreadyVisible = linkRect.left >= navRect.left && linkRect.right <= navRect.right;
-    if (alreadyVisible) return;
-
-    // `behavior: "smooth"` here previously caused a real mobile bug: this
-    // effect re-runs continuously as the user scrolls (driven by the
-    // IntersectionObserver above), and an animated scrollIntoView on a
-    // nested horizontal scroller inside a `position: sticky` ancestor can
-    // steal the touch-scroll gesture from the page on iOS/Android,
-    // making the page feel like it "stops scrolling" after a couple of
-    // swipes. An instant (`"auto"`) scroll completes within one frame and
-    // doesn't compete with an in-progress touch gesture the way a
-    // multi-frame animation does.
-    activeLink.scrollIntoView({ block: "nearest", inline: "center", behavior: "auto" });
-  }, [activeId]);
+  function handlePillClick(id: string) {
+    setActiveId(id);
+    // The only place this component ever calls scrollIntoView now: a
+    // direct, deliberate pill tap — never scroll-driven. Still guarded
+    // and deferred a frame so it can't collide with an in-flight native
+    // scroll/touch gesture either.
+    window.requestAnimationFrame(() => {
+      if (isTouchingRef.current) return;
+      const link = navRef.current?.querySelector<HTMLAnchorElement>(`a[href="#${id}"]`);
+      link?.scrollIntoView({ block: "nearest", inline: "center", behavior: "auto" });
+    });
+  }
 
   return (
     <nav
       ref={navRef}
       aria-label="Service categories"
       className="no-print scrollbar-hide sticky top-[57px] z-20 -mx-4 flex max-h-14 touch-pan-x gap-2 overflow-x-auto bg-cream/95 px-4 py-3 backdrop-blur sm:top-[65px] lg:sticky lg:top-24 lg:mx-0 lg:max-h-none lg:flex-col lg:touch-auto lg:overflow-visible lg:bg-transparent lg:p-0 lg:backdrop-blur-none"
+      style={{ scrollSnapType: "x mandatory" }}
     >
       {categories.map((category) => {
         const isActive = category.id === activeId;
@@ -80,11 +103,13 @@ export function CategoryNav({ categories }: CategoryNavProps) {
           <a
             key={category.id}
             href={`#${category.id}`}
+            onClick={() => handlePillClick(category.id)}
             className={`flex flex-none items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 font-body text-sm transition-colors lg:flex-none lg:rounded-lg ${
               isActive
                 ? "border-maroon bg-maroon text-cream"
                 : "border-maroon/30 text-ink hover:border-maroon"
             }`}
+            style={{ scrollSnapAlign: "center" }}
           >
             <span aria-hidden="true">{category.category_icon}</span>
             <span>{localize(language, category.category, category.category_ta)}</span>
