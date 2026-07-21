@@ -127,7 +127,7 @@ export const translations: Translations = {
     "caseStudies.guestCount": "guests",
     "services.title": "Our Services",
     "services.subtitle":
-      "From weddings to sacred spaces — we bring 30 years of craft to every occasion",
+      "From weddings to spiritual spaces — we bring 30 years of craft to every occasion",
     "services.featuredBadge": "Featured",
     "services.addonBadge": "Add-on",
     "services.enquireButton": "Enquire about this service",
@@ -202,7 +202,7 @@ export const translations: Translations = {
     "caseStudies.guestCount": "விருந்தினர்கள்",
     "services.title": "எங்க சேவைகள்",
     "services.subtitle":
-      "திருமணம் முதல் புனித இடங்கள் வரை — 30 வருஷ அனுபவத்தை ஒவ்வொரு நிகழ்விற்கும் கொண்டு வர்றோம்",
+      "திருமணம் முதல் ஆன்மிக இடங்கள் வரை — 30 வருஷ அனுபவத்தை ஒவ்வொரு நிகழ்விற்கும் கொண்டு வர்றோம்",
     "services.featuredBadge": "சிறப்பு",
     "services.addonBadge": "கூடுதல்",
     "services.enquireButton": "இந்த சேவை பத்தி என்க்வயரி பண்ணுங்க",
@@ -277,7 +277,7 @@ export const translations: Translations = {
     "caseStudies.guestCount": "விருந்தினர்",
     "services.title": "எமது சேவைகள்",
     "services.subtitle":
-      "திருமணங்கள் முதல் புனித தலங்கள் வரை — முப்பதாண்டு கைவினைத்திறனை ஒவ்வொரு நிகழ்விற்கும் அளிக்கின்றோம்",
+      "திருமணங்கள் முதல் ஆன்மிக தலங்கள் வரை — முப்பதாண்டு கைவினைத்திறனை ஒவ்வொரு நிகழ்விற்கும் அளிக்கின்றோம்",
     "services.featuredBadge": "சிறப்புச் சேவை",
     "services.addonBadge": "மேலதிகம்",
     "services.enquireButton": "இச்சேவை குறித்து விசாரிக்க",
@@ -353,7 +353,7 @@ export const translations: Translations = {
     "caseStudies.guestCount": "guests",
     "services.title": "Our Services",
     "services.subtitle":
-      "Weddings முதல் sacred spaces வரை — 30 years craft-ஐ ஒவ்வொரு occasion-க்கும் கொண்டு வர்றோம்",
+      "Weddings முதல் spiritual spaces வரை — 30 years craft-ஐ ஒவ்வொரு occasion-க்கும் கொண்டு வர்றோம்",
     "services.featuredBadge": "Featured",
     "services.addonBadge": "Add-on",
     "services.enquireButton": "இந்த service பத்தி Enquiry பண்ணுங்க",

@@ -4,6 +4,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { BackToTop } from "@/components/BackToTop";
 import { BRAND } from "@/lib/constants";
 import "./globals.css";
 
@@ -71,6 +72,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppFloat />
+          <BackToTop />
         </LanguageProvider>
       </body>
     </html>
