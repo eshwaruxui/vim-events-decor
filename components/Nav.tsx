@@ -15,14 +15,15 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-// Close is faster than open — matches Material's "ease-in to exit" feel.
+// VIM standard: ease-in-out var(--ease-vim) — open/close differ only in
+// duration (close reads snappier), never in curve. See docs/MOTION.md.
 const OPEN_TRANSITION = {
   transitionDuration: "250ms",
-  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionTimingFunction: "var(--ease-vim)",
 };
 const CLOSE_TRANSITION = {
   transitionDuration: "200ms",
-  transitionTimingFunction: "cubic-bezier(0.4, 0, 1, 1)",
+  transitionTimingFunction: "var(--ease-vim)",
 };
 const CLOSE_DURATION_MS = 200;
 
@@ -30,10 +31,11 @@ export function Nav() {
   const { t } = useLanguage();
   const pathname = usePathname() ?? "/";
   // `mounted` keeps the drawer in the DOM through its closing transition;
-  // `open` drives which end-state (and which duration/easing) it's
-  // animating toward. Closing = mounted && !open.
+  // `open` drives which end-state (and which duration) it's animating
+  // toward. Closing = mounted && !open.
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const unmountTimeoutRef = useRef<number>();
 
@@ -56,6 +58,27 @@ export function Nav() {
       setMounted(false);
     }, CLOSE_DURATION_MS + 20);
   }
+
+  // Measures the header's real rendered height (not a hardcoded guess —
+  // that previously drifted from actual font-rendering/line-height across
+  // browsers and caused the drawer to overlap the logo/close button) and
+  // publishes it as --nav-height so the portaled drawer can start exactly
+  // at its bottom edge. Re-measures on resize, font load, and language
+  // switches (which can reflow the nav to a different height).
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    function setNavHeightVar(height: number) {
+      document.documentElement.style.setProperty("--nav-height", `${height}px`);
+    }
+    setNavHeightVar(header.getBoundingClientRect().height);
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) setNavHeightVar(entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height);
+    });
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
 
   // Runs after the just-mounted drawer has committed at its closed
   // (translateY(-100%), opacity 0) styles. Reading offsetHeight forces the
@@ -90,39 +113,42 @@ export function Nav() {
 
   // Backdrop-filter (the header's `backdrop-blur`) creates a new
   // containing block for any position:fixed descendant, which would
-  // resolve this drawer's fixed offsets against the header's own ~65px
-  // box instead of the viewport — collapsing the backdrop to zero
-  // height. Portaling to <body> keeps it a true viewport-fixed overlay.
+  // resolve this drawer's fixed offsets against the header's own box
+  // instead of the viewport. Portaling to <body> keeps it a true
+  // viewport-fixed overlay, positioned via --nav-height above.
   const drawer = mounted
     ? createPortal(
         <>
+          {/* VIM standard: ease-in-out var(--ease-vim) */}
           <div
             aria-hidden="true"
             onClick={closeMenu}
-            className={`fixed inset-0 top-[57px] z-20 bg-black transition-opacity sm:top-[65px] md:hidden ${
+            className={`fixed inset-x-0 bottom-0 z-20 bg-black transition-opacity md:hidden ${
               open ? "opacity-50" : "opacity-0"
             }`}
-            style={open ? OPEN_TRANSITION : CLOSE_TRANSITION}
+            style={{ top: "var(--nav-height)", ...(open ? OPEN_TRANSITION : CLOSE_TRANSITION) }}
           />
+          {/* VIM standard: ease-in-out var(--ease-vim) */}
           <div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
             aria-label="Site menu"
-            className={`fixed inset-x-0 top-[57px] z-30 flex flex-col gap-3 border-b border-gold-light/30 bg-cream px-4 py-4 shadow-lg transition-[transform,opacity] sm:top-[65px] md:hidden ${
+            className={`fixed inset-x-0 bottom-0 z-30 flex flex-col gap-3 border-t border-gold-light/30 bg-cream px-4 py-4 shadow-lg transition-[transform,opacity] md:hidden ${
               open ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
             }`}
-            style={open ? OPEN_TRANSITION : CLOSE_TRANSITION}
+            style={{ top: "var(--nav-height)", ...(open ? OPEN_TRANSITION : CLOSE_TRANSITION) }}
           >
             <ul className="flex flex-col gap-1 font-body text-sm text-ink">
               {links.map((link) => {
                 const active = isActive(pathname, link.href);
                 return (
                   <li key={link.href}>
+                    {/* VIM standard: ease-in-out var(--ease-vim) */}
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className={`block py-1.5 transition-colors hover:text-maroon ${
+                      className={`block py-1.5 transition-colors duration-fast ease-vim hover:text-maroon ${
                         active ? "font-medium text-maroon underline underline-offset-4" : ""
                       }`}
                     >
@@ -140,7 +166,10 @@ export function Nav() {
     : null;
 
   return (
-    <header className="no-print sticky top-0 z-30 border-b border-gold-light/30 bg-cream/90 backdrop-blur">
+    <header
+      ref={headerRef}
+      className="no-print sticky top-0 z-30 border-b border-gold-light/30 bg-cream/90 backdrop-blur"
+    >
       <nav className="mx-auto max-w-5xl px-4 py-3 sm:px-6">
         {/* 3-zone layout: left (logo) and right (language/menu toggle) are
             fixed-content zones that never resize; the center zone alone
@@ -166,9 +195,10 @@ export function Nav() {
                 const active = isActive(pathname, link.href);
                 return (
                   <li key={link.href} className="shrink-0 whitespace-nowrap">
+                    {/* VIM standard: ease-in-out var(--ease-vim) */}
                     <Link
                       href={link.href}
-                      className={`transition-colors hover:text-maroon ${
+                      className={`transition-colors duration-fast ease-vim hover:text-maroon ${
                         active ? "font-medium text-maroon underline underline-offset-4" : ""
                       }`}
                     >
